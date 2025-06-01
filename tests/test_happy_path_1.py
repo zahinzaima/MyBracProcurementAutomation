@@ -1,6 +1,5 @@
 # this page contains all the test cases for the samplePage
 import pytest
-
 from pages.dashboard_page import DashboardPage
 from pages.login_page import LoginPage
 from pages.procurement_page import ProcurementPage
