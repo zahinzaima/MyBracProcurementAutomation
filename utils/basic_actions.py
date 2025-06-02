@@ -16,6 +16,9 @@ class BasicActions:
     def verify_by_title(self, title):
         expect(self.page).to_have_title(title)
 
+    def press_button(self, btnName):
+        self.page.keyboard.press(btnName)
+
     @staticmethod
     def wait_to_load_element(elem):
         elem.wait_for(state='visible')
@@ -35,3 +38,20 @@ class BasicActions:
     def select_from_list_by_value(elem, value):
         elem.click()
         elem.select_option(value)
+
+    def select_from_list_by_text(self, elem, text):
+        elem.wait_for(state='visible')
+        self.page.wait_for_timeout(500)
+        elem.fill(text)
+        # Add a wait for the dropdown to appear
+        self.page.wait_for_selector(f'div:text-matches("{text}", "i")', state='visible')
+        # Use get_by_text with exact match and wait for it to be visible
+        text_locator = self.page.get_by_text(text, exact=True)
+        text_locator.wait_for(state='visible', timeout=3000)
+        text_locator.click()
+
+    def select_from_dropdown(self, elem, text):
+        elem.click()
+        self.page.get_by_text(text, exact=True).click()
+        self.page.keyboard.press("Enter")
+        self.page.wait_for_timeout(5000)
