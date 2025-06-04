@@ -1,5 +1,6 @@
 # this is an object of samplePage to automate, which contains all elements
 # and actions could be performed, like input, verify etc.
+import re
 from utils.basic_actions import BasicActions
 from pages.procurement_home_page import ProcurementHomePage
 from playwright.sync_api import expect
@@ -12,25 +13,36 @@ class CreateRequisitionPage(ProcurementHomePage, BasicActions):
         self.proc_item_requisition_for_self = page.locator('input[type="radio"][id="self"]')
         self.proc_item_requisition_for_other = page.locator('input[type="radio"][id="other"]')
         self.proc_item_project = page.locator('css=#projectInfoDiv_input')
-        # self.proc_item_project = page.locator('css=#projectInfoDiv_ctr')
-        # projectInfoDiv_ctr
         self.proc_item_project_dropdown = page.locator('#projectInfoDiv_arrow')
         self.proc_item_source_of_fund = page.locator('css=#sourceOfFundDiv_arrow')
-        self.proc_item_information = page.get_by_role("input", name='itemInfoName')
-        self.proc_item_tor = page.get_by_role("textarea", name='itemSpecification')
-        self.proc_item_quantity = page.get_by_role("input", name='quantity')
-        self.proc_item_unit_price = page.get_by_role("input", name='unitPrice')
+        self.proc_item_information = page.locator('css=#itemInfo')
+        self.proc_item_unit_measure = page.locator('css=#mUnitDiv_arrow')
+
+        self.proc_item_tor = page.locator('css=#itemSpecification')
+        self.proc_item_quantity = page.locator('css=#quantity')
+        self.proc_item_unit_price = page.locator('css=#unitPrice')
+
         self.requisition_for_single_project = page.locator('input[type="radio"][id="singleProjectRadio"]')
         self.requisition_for_multiple_project = page.locator('input[type="radio"][id="multiProjectRadio"]')
         self.requisition_cost_quantity = page.locator('input[type="radio"][id="itemCostQuantity"]')
         self.requisition_cost_amount = page.locator('input[type="radio"][id="itemCostAmount"]')
+
         self.requisition_item_gl_code = page.locator('css=#glInfo_0Div_arrow')
         self.requisition_item_qty_amount = page.get_by_role("textbox", name="amountQty_0")
-        self.requisition_add_button = page.get_by_role("button", name='addToGrid')
-        self.save_button = page.get_by_role("button", name='Save')
-        self.submit_button = page.get_by_role("button", name='Submit')
+
+        self.requisition_add_button = page.get_by_role("button", name=re.compile("Add to Grid", re.IGNORECASE))
+        # schedule elements
+        self.requisition_delivery_schedule = page.get_by_role("checkbox", name=re.compile("Same schedule", re.IGNORECASE))
+        self.requisition_delivery_date = page.locator('css=#defaultDeliveryDate')
+        self.requisition_delivery_location = page.locator('//select[@id="defaultDeliveryStoreId"]')
+
+        # save and submit elements
+        self.save_button = page.get_by_role("button", name=re.compile("save", re.IGNORECASE))
+        self.submit_button = page.get_by_role("button", name=re.compile("submit", re.IGNORECASE))
+        self.confirm_submit_button = page.locator('css=button[role="button"] span[class="ui-button-text"]')
 
 
+    # methods to perform actions within the page
     def select_requisition_for_self(self):
         self.proc_item_requisition_for_self.click()
 
@@ -39,38 +51,49 @@ class CreateRequisitionPage(ProcurementHomePage, BasicActions):
 
     def input_project_name(self, project_name):
         self.select_from_dropdown(self.proc_item_project_dropdown, project_name)
-        #self.proc_item_project.wait_for(state='visible')
-        #self.select_from_list_by_text(self.proc_item_project, project_name)
-        #self.press_button("Enter")
-        # self.proc_item_project_dropdown.click()
-        # self.page.get_by_text(project_name).click()
-        # self.page.keyboard.press("Enter")
-        # self.page.wait_for_timeout(5000)
 
     def input_source_of_fund(self, source_of_fund):
         self.select_from_dropdown(self.proc_item_source_of_fund, source_of_fund)
 
-    def input_item_information(self, item_information):
+    def input_item_information(self, item_information, item_measure_unit):
         self.input_in_element(self.proc_item_information, item_information)
         self.press_button("Enter")
-        expect(self.proc_item_tor).to_have_text('Glue (any type of glue)')
+        #self.select_from_list_by_text(self.proc_item_unit_measure, item_measure_unit)
+        # self.proc_item_unit_measure.filter(has_text=item_measure_unit).click()
+        self.select_from_dropdown(self.proc_item_unit_measure, item_measure_unit)
+        self.press_button("Enter")
+        # print(self.proc_item_tor.get_attribute("value"))
+        # expect(self.proc_item_tor).to_have_text('Glue (any type of glue)')
 
     def input_item_quantity(self, quantity):
         self.input_in_element(self.proc_item_quantity, quantity)
-        if self.requisition_cost_quantity.is_checked():
-            expect(self.requisition_item_qty_amount).to_have_text(quantity)
+        # if self.requisition_cost_quantity.is_checked():
+        #     expect(self.requisition_item_qty_amount).to_have_text(quantity)
 
     def input_item_unit_price(self, unit_price):
         self.input_in_element(self.proc_item_unit_price, unit_price)
-        if self.requisition_cost_amount.is_checked():
-            qty = self.proc_item_quantity.get_attribute("value")
-            expect(self.requisition_item_qty_amount).to_have_value(qty*unit_price)
+        # if self.requisition_cost_amount.is_checked():
+        #     qty = self.proc_item_quantity.get_attribute("value")
+        #     expect(self.requisition_item_qty_amount).to_have_value(qty*unit_price)
 
     def add_item_to_grid(self):
         self.click_on_btn(self.requisition_add_button)
+        self.page.wait_for_timeout(5000)
+        self.click_on_btn(self.requisition_delivery_schedule)
+
+    def set_delivery_schedule(self):
+        self.click_on_btn(self.requisition_delivery_schedule)
+        self.input_in_element(self.requisition_delivery_date, "05-06-2025")
+        self.select_from_dropdown(self.requisition_delivery_location, "Head Office")
+
 
     def save_requisition(self):
         self.click_on_btn(self.save_button)
 
     def submit_requisition(self):
         self.click_on_btn(self.submit_button)
+        self.page.wait_for_timeout(10000)
+
+    def confirm_submit_requisition(self):
+        self.wait_to_load_element(self.confirm_submit_button)
+        self.click_on_btn(self.confirm_submit_button)

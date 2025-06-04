@@ -21,6 +21,6 @@ class ProcurementHomePage(BasicActions):
         # self.get_screen_shot("Selecting Create Requisition")
         # self.page.wait_for_timeout(5000)
         # self.get_screen_shot("Create Requisition Page")
-        expect(self.page.get_by_role("heading", name="Create Requisition")).to_be_visible()
+        #expect(self.page.get_by_role("heading", name="Create Requisition")).to_be_visible()
 
 

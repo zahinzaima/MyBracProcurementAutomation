@@ -19,6 +19,9 @@ class BasicActions:
     def press_button(self, btnName):
         self.page.keyboard.press(btnName)
 
+    def wait_for_timeout(self, timeout):
+        self.page.wait_for_timeout(timeout)
+
     @staticmethod
     def wait_to_load_element(elem):
         elem.wait_for(state='visible')
