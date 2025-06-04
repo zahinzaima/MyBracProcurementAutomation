@@ -40,6 +40,9 @@ class CreateRequisitionPage(ProcurementHomePage, BasicActions):
         self.save_button = page.get_by_role("button", name=re.compile("save", re.IGNORECASE))
         self.submit_button = page.get_by_role("button", name=re.compile("submit", re.IGNORECASE))
         self.confirm_submit_button = page.locator('css=button[role="button"] span[class="ui-button-text"]')
+        # requisition number elements
+        self.requisition_message = page.locator('//div[@class="message"]')
+        self.requisition_message_2 = page.locator('css=.message')
 
 
     # methods to perform actions within the page
@@ -58,11 +61,10 @@ class CreateRequisitionPage(ProcurementHomePage, BasicActions):
     def input_item_information(self, item_information, item_measure_unit):
         self.input_in_element(self.proc_item_information, item_information)
         self.press_button("Enter")
-        #self.select_from_list_by_text(self.proc_item_unit_measure, item_measure_unit)
-        # self.proc_item_unit_measure.filter(has_text=item_measure_unit).click()
+        #expect(self.proc_item_unit_measure).to_be_visible()
         self.select_from_dropdown(self.proc_item_unit_measure, item_measure_unit)
-        self.press_button("Enter")
-        # print(self.proc_item_tor.get_attribute("value"))
+        #self.press_button("Enter")
+        self.input_in_element(self.proc_item_tor, 'More Glue')
         # expect(self.proc_item_tor).to_have_text('Glue (any type of glue)')
 
     def input_item_quantity(self, quantity):
@@ -76,16 +78,18 @@ class CreateRequisitionPage(ProcurementHomePage, BasicActions):
         #     qty = self.proc_item_quantity.get_attribute("value")
         #     expect(self.requisition_item_qty_amount).to_have_value(qty*unit_price)
 
-    def add_item_to_grid(self):
-        self.click_on_btn(self.requisition_add_button)
-        self.page.wait_for_timeout(5000)
-        self.click_on_btn(self.requisition_delivery_schedule)
-
     def set_delivery_schedule(self):
         self.click_on_btn(self.requisition_delivery_schedule)
         self.input_in_element(self.requisition_delivery_date, "05-06-2025")
-        self.select_from_dropdown(self.requisition_delivery_location, "Head Office")
+        self.select_from_list_by_value(self.requisition_delivery_location, "Central Store")
 
+    def set_requisition_details(self):
+        self.requisition_for_single_project.click()
+        self.select_from_dropdown(self.requisition_item_gl_code, "[5102010107-05] Remuneration")
+
+    def add_item_to_grid(self):
+        self.click_on_btn(self.requisition_add_button)
+        self.page.wait_for_timeout(5000)
 
     def save_requisition(self):
         self.click_on_btn(self.save_button)
@@ -97,3 +101,8 @@ class CreateRequisitionPage(ProcurementHomePage, BasicActions):
     def confirm_submit_requisition(self):
         self.wait_to_load_element(self.confirm_submit_button)
         self.click_on_btn(self.confirm_submit_button)
+
+    def track_requisition_number(self):
+        #self.wait_to_load_element(self.requisition_message)
+        val_text = self.requisition_message_2.text_content()
+        print("Requisition Info: " + val_text)

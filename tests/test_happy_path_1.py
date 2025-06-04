@@ -12,8 +12,8 @@ from playwright.sync_api import sync_playwright
 @pytest.fixture(scope='session', autouse=True)
 def resource():
     with sync_playwright() as playwright:
-        browser = playwright.chromium.launch(headless=True)
-        context = browser.new_context()
+        browser = playwright.chromium.launch(args=["--start-maximized"], headless=True)
+        context = browser.new_context(viewport=None)
         page = context.new_page()
         yield page
         page.close()
@@ -42,19 +42,25 @@ def test_three(resource):
 
 def test_four(resource):
     c_page = CreateRequisitionPage(resource)
-    c_page.verify_by_title("Create Requisition")
-    c_page.get_screen_shot('modular_test_4')
-    c_page.select_requisition_for_self()
-    c_page.input_project_name("[H04] - Procurement-BRAC")
-    c_page.input_source_of_fund("BRAC")
-    c_page.input_item_information("[19190]-Glue-(Supplies and Stationeries->Supplies and Stationeries->Stationery)", "Pcs")
-    c_page.wait_for_timeout(10000)
-    c_page.input_item_quantity("10")
-    c_page.input_item_unit_price("100")
-    c_page.set_delivery_schedule()
-    c_page.add_item_to_grid()
-    c_page.get_screen_shot('modular_test_5')
-    c_page.submit_requisition()
-    #c_page.get_screen_shot('modular_test_6')
-    c_page.confirm_submit_requisition()
-    c_page.get_screen_shot('modular_test_7')
+    try:
+        c_page.verify_by_title("Create Requisition")
+        #c_page.get_screen_shot('modular_test_4')
+        c_page.select_requisition_for_self()
+        c_page.input_project_name("[H04] - Procurement-BRAC")
+        c_page.input_source_of_fund("BRAC")
+        c_page.input_item_information("[19190]-Glue-(Supplies and Stationeries->Supplies and Stationeries->Stationery)", "BAG")
+        c_page.wait_for_timeout(10000)
+        c_page.input_item_quantity("10")
+        c_page.input_item_unit_price("100")
+        c_page.set_delivery_schedule()
+        c_page.add_item_to_grid()
+        #c_page.get_screen_shot('modular_test_5')
+        c_page.save_requisition()
+        #c_page.get_screen_shot('modular_test_6')
+        #c_page.confirm_submit_requisition()
+        c_page.get_screen_shot('modular_test_7')
+        c_page.track_requisition_number()
+        c_page.get_full_page_screenshot('modular_test_8')
+    except Exception as e:
+        c_page.get_screen_shot('test_four_error')
+        raise e
