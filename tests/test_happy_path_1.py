@@ -1,6 +1,8 @@
 # this page contains all the test cases for the samplePage
 import pytest
 
+from rich.traceback import install
+
 from pages.create_requisition_page import CreateRequisitionPage
 from pages.dashboard_page import DashboardPage
 from pages.login_page import LoginPage
@@ -8,11 +10,12 @@ from pages.procurement_home_page import ProcurementHomePage
 from resources.resource_file import TestResources
 from playwright.sync_api import sync_playwright
 
+install()
 
 @pytest.fixture(scope='session', autouse=True)
 def resource():
     with sync_playwright() as playwright:
-        browser = playwright.chromium.launch(args=["--start-maximized"], headless=True)
+        browser = playwright.chromium.launch(args=["--start-maximized"], headless=False)
         context = browser.new_context(viewport=None)
         page = context.new_page()
         yield page
@@ -53,14 +56,17 @@ def test_four(resource):
         c_page.input_item_quantity("10")
         c_page.input_item_unit_price("100")
         c_page.set_delivery_schedule()
+        c_page.set_requisition_details()        # Providing GL details also
+        c_page.wait_for_timeout(5000)
+        c_page.get_full_page_screenshot('modular_test_5')
         c_page.add_item_to_grid()
-        #c_page.get_screen_shot('modular_test_5')
+        c_page.get_full_page_screenshot('modular_test_6')
         c_page.save_requisition()
-        #c_page.get_screen_shot('modular_test_6')
         #c_page.confirm_submit_requisition()
-        c_page.get_screen_shot('modular_test_7')
+        c_page.get_full_page_screenshot('modular_test_7')
+        c_page.wait_for_timeout(5000)
         c_page.track_requisition_number()
         c_page.get_full_page_screenshot('modular_test_8')
     except Exception as e:
-        c_page.get_screen_shot('test_four_error')
+        c_page.get_full_page_screenshot('test_four_error')
         raise e

@@ -42,7 +42,15 @@ class CreateRequisitionPage(ProcurementHomePage, BasicActions):
         self.confirm_submit_button = page.locator('css=button[role="button"] span[class="ui-button-text"]')
         # requisition number elements
         self.requisition_message = page.locator('//div[@class="message"]')
-        self.requisition_message_2 = page.locator('css=.message')
+        self.requisition_message_2 = page.locator('//div[@class="message"]')
+
+        # jGrowl > div.jGrowl-notification.ui-state-highlight.ui-corner-all.success
+        # jGrowl > div.jGrowl-notification.ui-state-highlight.ui-corner-all.success > div.message
+        # < div
+        #
+        # class ="jGrowl-notification ui-state-highlight ui-corner-all success" style="display: block;" > < div class ="close" > × < / div > < div class ="header" > Procurement Requisition < / div > < div class ="message" > Requisition Saved As Draft Successfully Requisition Number: REQ20250004371 <
+        #
+        # / div > < / div >
 
 
     # methods to perform actions within the page
