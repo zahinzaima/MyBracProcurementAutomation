@@ -1,10 +1,14 @@
 # this page contains all the test cases for the samplePage
+from resources.resource_file import TestResources
 from pages.create_requisition_page import CreateRequisitionPage
 from pages.dashboard_page import DashboardPage
 from pages.login_page import LoginPage
 from pages.procurement_home_page import ProcurementHomePage
-from resources.resource_file import TestResources
 from pages.requisition_approve_list import RequisitionApproveList
+
+from rich.traceback import install
+install()
+
 
 def test_one(resource):
     s_page  = LoginPage(resource)
@@ -15,21 +19,22 @@ def test_one(resource):
     )
     #s_page.get_screen_shot('modular_test_1')
 
-def test_two(resource):
-    d_page = DashboardPage(resource)
-    d_page.goto_procurement()
-    #d_page.get_screen_shot('modular_test_2')
-
-def test_three(resource):
-    p_page = ProcurementHomePage(resource)
-    p_page.navigate_to_create_requisition()
-    #p_page.get_screen_shot('modular_test_3')
+# def test_two(resource):
+#     d_page = DashboardPage(resource)
+#     d_page.goto_procurement()
+#     #d_page.get_screen_shot('modular_test_2')
+#
+# def test_three(resource):
+#     p_page = ProcurementHomePage(resource)
+#     p_page.navigate_to_create_requisition()
+#     #p_page.get_screen_shot('modular_test_3')
 
 def test_four(resource):
     c_page = CreateRequisitionPage(resource)
     try:
+        c_page.navigate_to_url("https://env28.erp.bracits.net/procurementDashboard/myDashboard#!/requisition/create")
         c_page.verify_by_title("Create Requisition")
-        #c_page.get_screen_shot('modular_test_4')
+        c_page.get_screen_shot('modular_test_4')
         c_page.select_requisition_for_self()
         c_page.input_project_name("[H04] - Procurement-BRAC")
         c_page.input_source_of_fund("BRAC")

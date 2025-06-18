@@ -2,6 +2,7 @@
 pytest
 playwright
 pytest-playwright
+pytest-html
 rich
 
 # Testing utilities
