@@ -1,6 +1,7 @@
 # Core dependencies
 pytest
 playwright
+pytest-playwright
 rich
 
 # Testing utilities
