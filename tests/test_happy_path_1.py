@@ -8,8 +8,9 @@ from pages.dashboard_page import DashboardPage
 from pages.login_page import LoginPage
 from pages.procurement_home_page import ProcurementHomePage
 from resources.resource_file import TestResources
-from playwright.sync_api import sync_playwright
 from pages.requisition_approve_list import RequisitionApproveList   
+from playwright.sync_api import sync_playwright
+
 
 install()
 
