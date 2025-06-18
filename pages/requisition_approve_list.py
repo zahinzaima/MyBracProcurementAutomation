@@ -17,13 +17,15 @@ class RequisitionApproveList(ProcurementHomePage, BasicActions):
 
     def search_requisition(self, requisition_number):
         self.input_in_element(self.search_box, requisition_number)
+        #self.page.wait_for_load_state("networkidle")
+        #self.press_button("Enter")
         self.page.keyboard.press("Enter")
-        self.page.wait_for_timeout(2000)
+        self.page.wait_for_timeout(5000)
 
     def select_requisition(self):
         # Select the checkbox for the requisition
         self.checkbox.click()
-        self.page.wait_for_timeout(1000)
+        #self.page.wait_for_timeout(1000)
 
     def approve_requisition(self):
         # Click the approve button

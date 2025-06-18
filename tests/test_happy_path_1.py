@@ -17,7 +17,7 @@ install()
 @pytest.fixture(scope='session', autouse=True)
 def resource():
     with sync_playwright() as playwright:
-        browser = playwright.chromium.launch(args=["--start-maximized"], headless=False)
+        browser = playwright.chromium.launch(args=["--start-maximized"], headless=True)
         context = browser.new_context(viewport=None)
         page = context.new_page()
         yield page
@@ -35,10 +35,10 @@ def test_one(resource):
     )
     #s_page.get_screen_shot('modular_test_1')
 
-def test_two(resource):
-    d_page = DashboardPage(resource)
-    d_page.goto_procurement()
-    #d_page.get_screen_shot('modular_test_2')
+# def test_two(resource):
+#     d_page = DashboardPage(resource)
+#     d_page.goto_procurement()
+#     #d_page.get_screen_shot('modular_test_2')
 
 # def test_three(resource):
 #     p_page = ProcurementHomePage(resource)
@@ -74,10 +74,12 @@ def test_two(resource):
 #         raise e
 def test_five(resource):
     r_page = RequisitionApproveList(resource)
-    r_page.navigate_to_url("https://env28.erp.bracits.net/procurementDashboard/myDashboard#!/requisition/list")
-
-    r_page.search_requisition(r_page.requisition_number)
-    r_page.select_requisition()
-    r_page.approve_requisition()
-    r_page.get_screen_shot('modular_test_9')
-    #r_page.get_full_page_screenshot('modular_test_10')
+    try:
+        r_page.navigate_to_url("https://env28.erp.bracits.net/procurementDashboard/myDashboard#!/requisition/authorizationList")
+        r_page.search_requisition(r_page.requisition_number)
+        r_page.select_requisition()
+        r_page.approve_requisition()
+        r_page.get_full_page_screenshot('modular_test_10')
+    except Exception as e:
+        r_page.get_full_page_screenshot('test_four_error')
+        raise e
