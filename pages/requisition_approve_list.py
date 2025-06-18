@@ -13,6 +13,7 @@ class RequisitionApproveList(ProcurementHomePage, BasicActions):
         self.search_box = page.get_by_placeholder("Search Requisition No")
         self.checkbox=page.locator("//*[@class='requisition_proposal_list']")
         self.approve= page.get_by_role("button", name=re.compile("Approve", re.IGNORECASE))
+        self.confirmation_message_approve = page.locator('button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-only', has_text="Approve")
         self.requisition_number="REQ20250004394"
 
     def search_requisition(self, requisition_number):
@@ -30,7 +31,16 @@ class RequisitionApproveList(ProcurementHomePage, BasicActions):
     def approve_requisition(self):
         # Click the approve button
         self.approve.click()
-        self.page.wait_for_timeout(1000)
+        self.page.wait_for_timeout(5000)
         # Verify the requisition number is displayed in the message
         #expect(self.page.locator('//div[@class="message"]')).to_contain_text(self.requisition_number)
         #self.page.wait_for_timeout(2000)
+    def confirmation_message_aprrove(self):
+        # Click the confirmation message approve button
+        self.confirmation_message_approve.click()
+        self.page.wait_for_timeout(2000)
+        # Verify the requisition number is displayed in the message
+        # expect(self.page.locator('//div[@class="message"]')).to_contain_text(self.requisition_number)
+        # self.page.wait_for_timeout(2000)
+
+

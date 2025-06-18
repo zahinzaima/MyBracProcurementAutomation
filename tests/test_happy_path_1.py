@@ -79,6 +79,7 @@ def test_five(resource):
         r_page.search_requisition(r_page.requisition_number)
         r_page.select_requisition()
         r_page.approve_requisition()
+        r_page.confirmation_message_aprrove()
         r_page.get_full_page_screenshot('modular_test_10')
     except Exception as e:
         r_page.get_full_page_screenshot('test_four_error')
