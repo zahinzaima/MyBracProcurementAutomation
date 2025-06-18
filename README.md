@@ -22,9 +22,13 @@ What are being installed here:
 
 What will we do:
 
+  
   We will be using POM design pattern here, where we will create web pages and store them in /pages folder,
+  
   write our tests [test cases or test suites] in /tests folder,
+  
   store our resources required in /resources folder,
+  
   write commonly used methods to interact with in /utils folder.
 
 
