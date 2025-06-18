@@ -5,7 +5,9 @@ What to do first:
   3. Install Git to your system
   4. Clone the repository to your system
   5. Open the cloned folder in Pycharm IDE
-  6. Open a terminal, and run 'pip install -r requirements.txt'
+  6. Open a terminal, and run
+    
+     pip install -r requirements.txt
 
 
 What are being installed here:
