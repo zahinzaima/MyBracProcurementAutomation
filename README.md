@@ -40,4 +40,4 @@ How to run test:
   
     -> To run all tests from /tests folder: pytest
     
-    -> To run a selected test file from /tests folder: pytest /tests/your_desired_test_file_name.py
+    -> To run a selected test file from /tests folder: pytest ./tests/your_desired_test_file_name.py
