@@ -14,7 +14,7 @@ class BasicActions:
         self.page.screenshot(path=os.getcwd() + "/screenshots/" + name + ".png", full_page=True)
 
     def navigate_to_url(self, given_url):
-        self.page.goto(given_url)
+        self.page.goto(given_url, wait_until="networkidle")
 
     def verify_by_title(self, title):
         expect(self.page).to_have_title(title)

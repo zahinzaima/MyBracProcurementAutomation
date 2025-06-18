@@ -1,6 +1,7 @@
 # Core dependencies
-pytest~=8.3.5
-playwright~=1.52.0
+pytest
+playwright
+rich
 
 # Testing utilities
 #pytest-playwright==0.3.0
