@@ -35,23 +35,32 @@ def test_four(resource):
         c_page.navigate_to_url("https://env28.erp.bracits.net/procurementDashboard/myDashboard#!/requisition/create")
         c_page.verify_by_title("Create Requisition")
         c_page.get_screen_shot('modular_test_4')
-        c_page.select_requisition_for_self()
-        c_page.input_project_name("[H04] - Procurement-BRAC")
-        c_page.input_source_of_fund("BRAC")
-        c_page.input_item_information("[19190]-Glue-(Supplies and Stationeries->Supplies and Stationeries->Stationery)", "BAG")
+        c_page.set_requisition_for_HO_and_project(
+            True,
+            "[H04] - Procurement-BRAC")
+        c_page.set_requisition_information(
+            "112BRAC",
+            "requisition remarks")
+        c_page.set_requisition_details(
+            "[19190]-Glue-(Supplies and Stationeries->Supplies and Stationeries->Stationery)",
+            "BAG",
+            "10",
+            "150")
         c_page.wait_for_timeout(10000)
-        c_page.input_item_quantity("10")
-        c_page.input_item_unit_price("100")
-        c_page.set_delivery_schedule()
-        c_page.set_requisition_details()        # Providing GL details also
+        c_page.set_requisition_project_delivery_schedule(
+            "[5102010107-05] Remuneration",
+            "05-06-2025",
+            "Central Store")
         c_page.wait_for_timeout(5000)
         c_page.get_full_page_screenshot('modular_test_5')
+
         c_page.add_item_to_grid()
         c_page.get_full_page_screenshot('modular_test_6')
+
         c_page.save_requisition()
-        #c_page.confirm_submit_requisition()
         c_page.get_full_page_screenshot('modular_test_7')
         c_page.wait_for_timeout(5000)
+
         c_page.track_requisition_number()
         c_page.get_full_page_screenshot('modular_test_8')
     except Exception as e:
