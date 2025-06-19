@@ -24,6 +24,8 @@ class TestConfig:
     ENVIRONMENT = os.getenv("ENV", "Staging")
     BROWSER = os.getenv("BROWSER", "Chromium")
     HEADLESS = not bool(os.getenv("HEADFUL", False))
+#    HEADLESS = not bool(os.getenv("HEADFUL", True))
+
 
 
 # Ensure directories exist
@@ -95,7 +97,7 @@ def pytest_runtest_makereport(item, call):
         report.extras = report_extras
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture(scope="session", autouse=True)
 def resource(request):
     """Playwright page fixture with automatic tracing and video recording."""
     test_name = request.node.name
@@ -107,7 +109,8 @@ def resource(request):
         )
 
         context = browser.new_context(
-            viewport=None,
+#            no_viewport=True,
+            viewport=None, #{"width": 1920, "height": 1080},
             record_video_dir=VIDEO_DIR,
             ignore_https_errors=True
         )

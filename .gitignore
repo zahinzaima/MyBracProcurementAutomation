@@ -1,6 +1,7 @@
 /screenshots
 /videos
 /traces
+/report
 /__pychache__
 __pychache__
 *.pyc
