@@ -90,6 +90,7 @@ def test_six(resource):
         r_page.navigate_to_url("https://env28.erp.bracits.net/procurementDashboard/myDashboard#!/requisition/authorizationList")
         r_page.search_requisition(r_page.requisition_number)
         r_page.navigate_to_requisition_detail_page()
+        r_page.approve_requisition_from_details_page()
         r_page.get_full_page_screenshot('modular_test_11')
     except Exception as e:
         r_page.get_full_page_screenshot('test_four_error')

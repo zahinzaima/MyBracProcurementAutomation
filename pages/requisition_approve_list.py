@@ -15,6 +15,7 @@ class RequisitionApproveList(ProcurementHomePage, BasicActions):
         self.approve= page.get_by_role("button", name=re.compile("Approve", re.IGNORECASE))
         self.navigate_to_requisition_detail_page2 = page.locator('a[style="text-decoration: underline;"]')
         self.confirmation_message_approve = page.locator('button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-only', has_text="Approve")
+        self.requisition_details_page_approve=page.get_by_role("button", name=re.compile("Approve", re.IGNORECASE))
         self.requisition_number="REQ20250004339"
 
     def search_requisition(self, requisition_number):
@@ -27,8 +28,16 @@ class RequisitionApproveList(ProcurementHomePage, BasicActions):
     def navigate_to_requisition_detail_page(self):
         # Click on the requisition number link
         self.navigate_to_requisition_detail_page2.click()
-        self.page.wait_for_timeout(2000)  
+        self.page.wait_for_timeout(2000)
 
+    def approve_requisition_from_details_page(self):
+        # Click the approve button on the requisition details page
+        self.requisition_details_page_approve.click()
+        self.page.wait_for_timeout(2000)
+        # Verify the requisition number is displayed in the message
+        #expect(self.page.locator('//div[@class="message"]')).to_contain_text(self.requisition_number)
+        #self.page.wait_for_timeout(2000) 
+        
     def select_requisition(self):
         # Select the checkbox for the requisition
         self.checkbox.click()
