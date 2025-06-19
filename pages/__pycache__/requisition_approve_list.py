@@ -13,7 +13,7 @@ class RequisitionApproveList(ProcurementHomePage, BasicActions):
         self.search_box = page.get_by_placeholder("Search Requisition No")
         self.checkbox=page.locator("//*[@class='requisition_proposal_list']")
         self.approve= page.get_by_role("button", name=re.compile("Approve", re.IGNORECASE))
-        self.requisition_number="REQ20250004394"
+        self.requisition_number="REQ20250009707"
 
     def search_requisition(self, requisition_number):
         self.input_in_element(self.search_box, requisition_number)
