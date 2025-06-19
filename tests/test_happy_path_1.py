@@ -18,7 +18,7 @@ install()
 def resource():
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch(args=["--start-maximized"], headless=False)
-        context = browser.new_context(viewport=None)
+        context = browser.new_context(no_viewport=True)
         page = context.new_page()
         yield page
         page.close()
