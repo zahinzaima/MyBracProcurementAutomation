@@ -8,7 +8,8 @@ from pages.dashboard_page import DashboardPage
 from pages.login_page import LoginPage
 from pages.procurement_home_page import ProcurementHomePage
 from resources.resource_file import TestResources
-from pages.requisition_approve_list import RequisitionApproveList   
+from pages.requisition_approve_list import RequisitionApproveList
+from pages.assign_requisition import AssignRequisition       
 from playwright.sync_api import sync_playwright
 
 
@@ -84,15 +85,24 @@ def test_one(resource):
 #     except Exception as e:
 #         r_page.get_full_page_screenshot('test_four_error')
 #         raise e
-def test_six(resource):
-    r_page = RequisitionApproveList(resource)
+# def test_six(resource):
+#     r_page = RequisitionApproveList(resource)
+#     try:
+#         r_page.navigate_to_url("https://env28.erp.bracits.net/procurementDashboard/myDashboard#!/requisition/authorizationList")
+#         r_page.search_requisition(r_page.requisition_number)
+#         r_page.navigate_to_requisition_detail_page()
+#         r_page.approve_requisition_from_details_page()
+#         r_page.get_full_page_screenshot('modular_test_11')
+#     except Exception as e:
+#         r_page.get_full_page_screenshot('test_four_error')
+#         raise e
+def test_seven(resource):
+    r_page = AssignRequisition(resource)
     try:
-        r_page.navigate_to_url("https://env28.erp.bracits.net/procurementDashboard/myDashboard#!/requisition/authorizationList")
-        r_page.search_requisition(r_page.requisition_number)
-        r_page.navigate_to_requisition_detail_page()
-        r_page.approve_requisition_from_details_page()
-        r_page.get_full_page_screenshot('modular_test_11')
+        r_page.navigate_to_url("https://env28.erp.bracits.net/procurementDashboard/myDashboard#!/requisition/assignRequisitions")
+        r_page.assigning_person(assigned_person=TestResources.test_requisition_assignee)
+        r_page.get_full_page_screenshot('modular_test_12')
     except Exception as e:
-        r_page.get_full_page_screenshot('test_four_error')
+        r_page.get_full_page_screenshot('test_12_error')
         raise e
-    
+        
