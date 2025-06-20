@@ -11,6 +11,7 @@ class AssignRequisition(ProcurementHomePage, BasicActions):
         super().__init__(page)
         # self.assigned_to = page.get_by_label("Assigned To")
         self.assigned_to = page.locator("#employeeInfoDiv_input")
+        self.selecting_person = page.locator('#employeeInfoDiv_hidden')
 
 
     def assigning_person(self, assigned_person):
@@ -19,4 +20,8 @@ class AssignRequisition(ProcurementHomePage, BasicActions):
         #self.press_button("Enter")
         self.page.wait_for_timeout(1000)
         self.page.keyboard.press("Enter")
-        self.page.wait_for_timeout(5000)
+        # self.selecting_person.wait_for(state="visible")
+        # self.selecting_person.click()
+        self.page.wait_for_timeout(4000)
+        self.page.keyboard.press("Enter")
+        self.page.wait_for_timeout(1000)
