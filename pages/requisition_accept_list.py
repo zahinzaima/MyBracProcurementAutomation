@@ -13,8 +13,6 @@ class RequisitionAcceptList(ProcurementHomePage, BasicActions):
         self.accept = page.get_by_role("button", name=re.compile("Accept", re.IGNORECASE))
         self.confirmation_message_accept = page.locator('span.ui-button-text', has_text="Accept")
         
-        
-
     def search_requisition(self, requisition_number):
         self.input_in_element(self.req_no, requisition_number + " ") # adding a trailing space to ensure the input is recognized
         self.page.wait_for_timeout(1000)
