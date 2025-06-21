@@ -101,6 +101,7 @@ def test_seven(resource):
     try:
         r_page.navigate_to_url("https://env28.erp.bracits.net/procurementDashboard/myDashboard#!/requisition/assignRequisitions")
         r_page.assigning_person(assigned_person=TestResources.test_requisition_assignee)
+        r_page.search_requisition_for_assigning(requisition_number=TestResources.test_requisition_number)
         r_page.get_full_page_screenshot('modular_test_12')
     except Exception as e:
         r_page.get_full_page_screenshot('test_12_error')
