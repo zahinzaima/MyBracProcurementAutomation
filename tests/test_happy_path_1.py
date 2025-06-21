@@ -11,6 +11,7 @@ from resources.resource_file import TestResources
 from pages.requisition_approve_list import RequisitionApproveList
 from pages.assign_requisition import AssignRequisition
 from pages.requisition_accept_list import RequisitionAcceptList
+from pages.main_navigation_bar import MainNavigationBar
 from utils.basic_actions import BasicActions       
 from playwright.sync_api import sync_playwright
 
@@ -38,6 +39,15 @@ def test_one(resource):
     )
     #s_page.get_screen_shot('modular_test_1')
 
+def test_two(resource):
+    r_page = DashboardPage(resource)
+    try:
+        r_page.closing_add()
+        r_page.get_full_page_screenshot('modular_test_2')
+    except Exception as e:
+        r_page.get_full_page_screenshot('test_2_error')
+        raise e
+    
 # def test_two(resource):
 #     d_page = DashboardPage(resource)
 #     d_page.goto_procurement()
@@ -109,14 +119,24 @@ def test_one(resource):
 #         r_page.get_full_page_screenshot('test_12_error')
 #         raise e
     
-def test_eight(resource):
-    r_page = RequisitionAcceptList(resource)
+# def test_eight(resource):
+#     r_page = RequisitionAcceptList(resource)
+#     try:
+#         r_page.navigate_to_url("https://env28.erp.bracits.net/procurementDashboard/dashboard#!/requisition/assignedRequisitionShowList")
+#         r_page.search_requisition(requisition_number=TestResources.test_requisition_number)
+#         r_page.select_all_requisitions()
+#         r_page.accept_requisition()
+#         r_page.confirm_acceptance()
+#         r_page.get_full_page_screenshot('modular_test_12')
+#     except Exception as e:
+#         r_page.get_full_page_screenshot('test_12_error')
+#         raise e
+    
+def test_nine(resource):
+    r_page = MainNavigationBar(resource)
     try:
-        r_page.navigate_to_url("https://env28.erp.bracits.net/procurementDashboard/dashboard#!/requisition/assignedRequisitionShowList")
-        r_page.search_requisition(requisition_number=TestResources.test_requisition_number)
-        r_page.select_all_requisitions()
-        r_page.accept_requisition()
-        r_page.confirm_acceptance()
+        r_page.exit()
+        r_page.logout()
         r_page.get_full_page_screenshot('modular_test_12')
     except Exception as e:
         r_page.get_full_page_screenshot('test_12_error')

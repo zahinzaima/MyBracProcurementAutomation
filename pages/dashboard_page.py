@@ -26,7 +26,10 @@ class DashboardPage(BasicActions):
         self.myDashboardItem_HOFAMS = page.locator('xpath=//*[contains(text(),"HO FAMS")]')
         self.myDashboardItem_MonthlyMFReportingTool = page.locator('xpath=//*[contains(text(),"Monthly MF Reporting Tool")]')
         self.myDashboardItem_BracInventory = page.locator('xpath=//*[contains(text(),"Brac Inventory")]')
+    
+    def closing_add(self) -> None:
+        self.wait_for_timeout(1000)   
+        self.page.keyboard.press('Enter')
 
     def goto_procurement(self) -> None:
-        self.page.keyboard.press('Enter')
         self.click_on_btn(self.myDashboardItem_procurement)
