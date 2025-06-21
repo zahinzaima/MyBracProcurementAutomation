@@ -114,6 +114,9 @@ def test_eight(resource):
     try:
         r_page.navigate_to_url("https://env28.erp.bracits.net/procurementDashboard/dashboard#!/requisition/assignedRequisitionShowList")
         r_page.search_requisition(requisition_number=TestResources.test_requisition_number)
+        r_page.select_all_requisitions()
+        r_page.accept_requisition()
+        r_page.confirm_acceptance()
         r_page.get_full_page_screenshot('modular_test_12')
     except Exception as e:
         r_page.get_full_page_screenshot('test_12_error')
