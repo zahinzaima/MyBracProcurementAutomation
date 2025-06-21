@@ -13,6 +13,10 @@ class AssignRequisition(ProcurementHomePage, BasicActions):
         self.assigned_to = page.locator("#employeeInfoDiv_input")
         self.selecting_person = page.locator('#employeeInfoDiv_hidden')
         self.requisition_search_box = page.locator("#assignMultiSelectDiv").get_by_role("textbox")
+        self.add_all=page.get_by_role("link", name="Add all")
+        self.remove_all=page.get_by_role("link", name="Remove all")
+        self.assign_button = page.get_by_role("button", name="Assign")
+        self.comfirmation_message_assign = page.get_by_role("button", name="Yes")
 
 
     def assigning_person(self, assigned_person):
@@ -33,4 +37,8 @@ class AssignRequisition(ProcurementHomePage, BasicActions):
         #self.press_button("Enter")
         self.page.keyboard.press("Enter")
         self.page.wait_for_timeout(5000)
+        self.assign_button.click()
+        self.page.wait_for_timeout(2000)
+        self.comfirmation_message_assign.click()
+        self.page.wait_for_timeout(2000)
         #expect(self.page.locator("//div[@class='requisition_proposal_list']")).to_contain_text(requisition_number)

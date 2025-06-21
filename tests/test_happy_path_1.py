@@ -9,7 +9,9 @@ from pages.login_page import LoginPage
 from pages.procurement_home_page import ProcurementHomePage
 from resources.resource_file import TestResources
 from pages.requisition_approve_list import RequisitionApproveList
-from pages.assign_requisition import AssignRequisition       
+from pages.assign_requisition import AssignRequisition
+from pages.requisition_accept_list import RequisitionAcceptList
+from utils.basic_actions import BasicActions       
 from playwright.sync_api import sync_playwright
 
 
@@ -96,12 +98,22 @@ def test_one(resource):
 #     except Exception as e:
 #         r_page.get_full_page_screenshot('test_four_error')
 #         raise e
-def test_seven(resource):
-    r_page = AssignRequisition(resource)
+# def test_seven(resource):
+#     r_page = AssignRequisition(resource)
+#     try:
+#         r_page.navigate_to_url("https://env28.erp.bracits.net/procurementDashboard/myDashboard#!/requisition/assignRequisitions")
+#         r_page.assigning_person(assigned_person=TestResources.test_requisition_assignee)
+#         r_page.search_requisition_for_assigning(requisition_number=TestResources.test_requisition_number)
+#         r_page.get_full_page_screenshot('modular_test_12')
+#     except Exception as e:
+#         r_page.get_full_page_screenshot('test_12_error')
+#         raise e
+    
+def test_eight(resource):
+    r_page = RequisitionAcceptList(resource)
     try:
-        r_page.navigate_to_url("https://env28.erp.bracits.net/procurementDashboard/myDashboard#!/requisition/assignRequisitions")
-        r_page.assigning_person(assigned_person=TestResources.test_requisition_assignee)
-        r_page.search_requisition_for_assigning(requisition_number=TestResources.test_requisition_number)
+        r_page.navigate_to_url("https://env28.erp.bracits.net/procurementDashboard/dashboard#!/requisition/assignedRequisitionShowList")
+        r_page.search_requisition(requisition_number=TestResources.test_requisition_number)
         r_page.get_full_page_screenshot('modular_test_12')
     except Exception as e:
         r_page.get_full_page_screenshot('test_12_error')
