@@ -7,6 +7,7 @@ class TestResources:
     test_requisition_approver = "138486"
     test_admin = "137124"
     test_requisition_assignee = "00000761"
-    test_requisition_number="REQ20250004394"  
+    test_requisition_number="REQ20250004296"
+     
 
     #erp_url = "https://env28.erp.bracits.net/"
