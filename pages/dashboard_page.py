@@ -29,4 +29,4 @@ class DashboardPage(BasicActions):
 
     def goto_procurement(self) -> None:
         self.page.keyboard.press('Enter')
-        self.click_on_btn(self.myDashboardItem_procurement)
+        #self.click_on_btn(self.myDashboardItem_procurement)

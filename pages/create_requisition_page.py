@@ -33,6 +33,8 @@ class CreateRequisitionPage(ProcurementHomePage, BasicActions):
 
         self.requisition_item_gl_code = page.locator('css=#glInfo_0Div_arrow')
         self.requisition_item_qty_amount = page.get_by_role("textbox", name="amountQty_0")
+        self.requisition_item_remarks = page.get_by_placeholder("Max size of item remarks 500 characters")
+        # page.get_by_role("textbox", name="reqDetailsRemarks")
 
         self.requisition_add_button = page.get_by_role("button", name=re.compile("Add to Grid", re.IGNORECASE))
         # schedule elements
@@ -79,7 +81,7 @@ class CreateRequisitionPage(ProcurementHomePage, BasicActions):
         self.press_button("Enter")
         #expect(self.proc_item_unit_measure).to_be_visible()
         self.select_from_dropdown(self.proc_item_unit_measure, item_measure_unit)
-        #self.press_button("Enter")
+        self.press_button("Enter")
         self.input_in_element(self.proc_item_tor, 'More Glue')
         # expect(self.proc_item_tor).to_have_text('Glue (any type of glue)')
         self.input_in_element(self.proc_item_quantity, quantity)
@@ -93,6 +95,7 @@ class CreateRequisitionPage(ProcurementHomePage, BasicActions):
     def set_requisition_project_delivery_schedule(self, gl_code, delivery_date, delivery_location):
         self.requisition_for_single_project.click()
         self.select_from_dropdown(self.requisition_item_gl_code, gl_code)
+        self.input_in_element(self.requisition_item_remarks, "Deliver all Glues")
         self.click_on_btn(self.requisition_delivery_schedule)
         self.input_in_element(self.requisition_delivery_date, delivery_date)
         self.select_from_list_by_value(self.requisition_delivery_location, delivery_location)
