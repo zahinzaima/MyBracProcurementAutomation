@@ -97,6 +97,8 @@ def test_two(resource):
 #     except Exception as e:
 #         r_page.get_full_page_screenshot('test_four_error')
 #         raise e
+
+
 # def test_six(resource):
 #     r_page = RequisitionApproveList(resource)
 #     try:
@@ -108,16 +110,19 @@ def test_two(resource):
 #     except Exception as e:
 #         r_page.get_full_page_screenshot('test_four_error')
 #         raise e
-# def test_seven(resource):
-#     r_page = AssignRequisition(resource)
-#     try:
-#         r_page.navigate_to_url("https://env28.erp.bracits.net/procurementDashboard/myDashboard#!/requisition/assignRequisitions")
-#         r_page.assigning_person(assigned_person=TestResources.test_requisition_assignee)
-#         r_page.search_requisition_for_assigning(requisition_number=TestResources.test_requisition_number)
-#         r_page.get_full_page_screenshot('modular_test_12')
-#     except Exception as e:
-#         r_page.get_full_page_screenshot('test_12_error')
-#         raise e
+    
+
+def test_seven(resource):
+    r_page = AssignRequisition(resource)
+    try:
+        r_page.navigate_to_url("https://env28.erp.bracits.net/procurementDashboard/myDashboard#!/requisition/assignRequisitions")
+        r_page.assigning_person(assigned_person=TestResources.test_requisition_assignee)
+        r_page.search_requisition_for_assigning(requisition_number=TestResources.test_requisition_number)
+        r_page.add_item_to_assign()
+        r_page.get_full_page_screenshot('modular_test_12')
+    except Exception as e:
+        r_page.get_full_page_screenshot('test_12_error')
+        raise e
     
 # def test_eight(resource):
 #     r_page = RequisitionAcceptList(resource)
@@ -132,13 +137,13 @@ def test_two(resource):
 #         r_page.get_full_page_screenshot('test_12_error')
 #         raise e
     
-def test_nine(resource):
-    r_page = MainNavigationBar(resource)
-    try:
-        r_page.exit()
-        r_page.logout()
-        r_page.get_full_page_screenshot('modular_test_12')
-    except Exception as e:
-        r_page.get_full_page_screenshot('test_12_error')
-        raise e
+# def test_nine(resource):
+#     r_page = MainNavigationBar(resource)
+#     try:
+#         r_page.exit()
+#         r_page.logout()
+#         r_page.get_full_page_screenshot('modular_test_12')
+#     except Exception as e:
+#         r_page.get_full_page_screenshot('test_12_error')
+#         raise e
         
