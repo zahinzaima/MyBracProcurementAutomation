@@ -12,6 +12,7 @@ VIDEOS_DIR = ARTIFACTS_DIR / "videos"
 TRACES_DIR = ARTIFACTS_DIR / "traces"
 SCREENSHOTS_DIR = ARTIFACTS_DIR / "screenshots"
 
+
 # Global variables
 global_browser: Optional[Browser] = None
 global_context: Optional[BrowserContext] = None

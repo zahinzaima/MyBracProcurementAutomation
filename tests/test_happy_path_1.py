@@ -43,7 +43,7 @@ def test_four(page):
             True,
             "[H04] - Procurement-BRAC")
         c_page.set_requisition_information(
-            "112BRAC",#"112BRAC",
+            "BRAC",#"112BRAC",
             "requisition remarks")
         c_page.set_requisition_details(
             "[19190]-Glue-(Supplies and Stationeries->Supplies and Stationeries->Stationery)",

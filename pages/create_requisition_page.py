@@ -47,9 +47,9 @@ class CreateRequisitionPage(ProcurementHomePage, BasicActions):
         self.submit_button = page.get_by_role("button", name=re.compile("submit", re.IGNORECASE))
         self.confirm_submit_button = page.locator('css=button[role="button"] span[class="ui-button-text"]')
         # requisition number elements
-        # self.requisition_message = page.locator('//div[@class="message"]')
+        self.requisition_message = page.locator('//div[@class="message"]')
         # self.requisition_message_2 = page.locator('//div[@class="message"]')
-        self.requisition_message = page.get_by_text("Procurement Requisition", exact=True)
+        # self.requisition_message = page.get_by_text("Procurement Requisition", exact=True)
 
         # jGrowl > div.jGrowl-notification.ui-state-highlight.ui-corner-all.success
         # jGrowl > div.jGrowl-notification.ui-state-highlight.ui-corner-all.success > div.message
@@ -117,5 +117,7 @@ class CreateRequisitionPage(ProcurementHomePage, BasicActions):
 
     def track_requisition_number(self):
         #self.wait_to_load_element(self.requisition_message)
+        self.requisition_message.wait_for(state="visible", timeout=10000)
         val_text = self.requisition_message.text_content()
+        self.requisition_message.wait_for(state="hidden", timeout=10000)
         print("Requisition Info: " + val_text)
