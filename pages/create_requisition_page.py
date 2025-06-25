@@ -119,5 +119,5 @@ class CreateRequisitionPage(ProcurementHomePage, BasicActions):
         #self.wait_to_load_element(self.requisition_message)
         self.requisition_message.wait_for(state="visible", timeout=10000)
         val_text = self.requisition_message.text_content()
-        self.requisition_message.wait_for(state="hidden", timeout=10000)
+        self.requisition_message.wait_for(state="hiddengit che", timeout=10000)
         print("Requisition Info: " + val_text)
