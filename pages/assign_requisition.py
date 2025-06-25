@@ -18,41 +18,31 @@ class AssignRequisition(ProcurementHomePage, BasicActions):
         self.remove_all=page.get_by_role("link", name="Remove all")
         self.assign_button = page.get_by_role("button", name="Assign")
         self.comfirmation_message_assign = page.get_by_role("button", name="Yes")
-        locator_text_add_item = "//div[@id='tabs-1']//child::li[contains(text(),'"+TestResources.test_requisition_number+"')][1]//following-sibling::a/span[@class='ui-corner-all ui-icon ui-icon-plus']"
-        self.add_item= page.locator(locator_text_add_item) 
+        self.locator_text_add_item = "//div[@id='tabs-1']//child::li[contains(text(),'"+TestResources.test_requisition_number+"')][1]//following-sibling::a/span[@class='ui-corner-all ui-icon ui-icon-plus']"
+        self.add_item= page.locator(self.locator_text_add_item)
        
 
 
     def assigning_person(self, assigned_person):
         self.input_in_element(self.assigned_to, assigned_person)
-        #self.page.wait_for_load_state("networkidle")
-        #self.press_button("Enter")
         self.page.wait_for_timeout(1000)
         self.page.keyboard.press("Enter")
-        # self.selecting_person.wait_for(state="visible")
-        # self.selecting_person.click()
         self.page.wait_for_timeout(4000)
         self.page.keyboard.press("Enter")
         self.page.wait_for_timeout(1000)
     
-    def add_item_to_assign(self):        
-        try:
-            i = 0
-            while self.wait_to_load_element(self.add_item):
-                self.add_item.click()
-                self.page.get_full_page_screenshot('item_added_for_assigning'+i)
-                self.page.wait_for_timeout(5000)
-                i += 1
-        except Exception:
-            print("No more items to add for assigning.")
-            pass
-            
-        
+    def add_item_to_assign(self):
+        print("Elem Xpath = " + self.locator_text_add_item)
+        i = 0
+        while self.add_item.is_visible():
+            print("Elem Visible")
+            self.add_item.click()
+            self.page.wait_for_timeout(5000)
+            self.get_full_page_screenshot('item_added_for_assigning_' + str(i))
+            i = i + 1
 
     def search_requisition_for_assigning(self, requisition_number):
         self.input_in_element(self.requisition_search_box, requisition_number)
-        #self.page.wait_for_load_state("networkidle")
-        #self.press_button("Enter")
         self.page.keyboard.press("Enter")
         self.page.wait_for_timeout(5000)
         # self.assign_button.click()

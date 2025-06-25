@@ -30,6 +30,9 @@ class BasicActions:
         elem.wait_for(state='visible')
         print('waited for the elem')
 
+    def is_element_visible(self, elem):
+        return elem.is_visible()
+
     @staticmethod
     def click_on_btn(btn):
         btn.click()

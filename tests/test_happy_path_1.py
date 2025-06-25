@@ -31,6 +31,7 @@ def resource():
 
 
 def test_one(resource):
+    print("Test One")
     s_page  = LoginPage(resource)
     s_page.navigate_to_url(TestResources.test_url)
     s_page.perform_login(
@@ -40,6 +41,7 @@ def test_one(resource):
     #s_page.get_screen_shot('modular_test_1')
 
 def test_two(resource):
+    print("Test Two")
     r_page = DashboardPage(resource)
     try:
         r_page.closing_add()
@@ -113,6 +115,7 @@ def test_two(resource):
     
 
 def test_seven(resource):
+    print("Test Seven")
     r_page = AssignRequisition(resource)
     try:
         r_page.navigate_to_url("https://env28.erp.bracits.net/procurementDashboard/myDashboard#!/requisition/assignRequisitions")
