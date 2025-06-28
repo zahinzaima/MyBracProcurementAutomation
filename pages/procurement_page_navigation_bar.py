@@ -2,6 +2,7 @@
 # and actions could be performed, like input, verify etc.
 from utils.basic_actions import BasicActions
 from playwright.sync_api import expect
+import re
 
 
 class ProcurementPageNavigationBar(BasicActions):
@@ -9,59 +10,146 @@ class ProcurementPageNavigationBar(BasicActions):
         super().__init__(page)
         # write down all the elements here with locator format
 
-        self.requisition = page.get_by_text("Requisition", exact=True)
+        self.requisition = page.locator('//div[text()="Requisition"]')
         #under requisition
         self.create_requisition = page.get_by_role("link", name="Create Requisition")
-        self.requisition_initiator_list = page.get_by_role("link", name="Requisition Initiator List")
         self.requisition_list = page.get_by_role("link", name="Requisition List")
         self.requisition_approval_list = page.get_by_role("link", name="Requisition Approve List")
         self.requisition_assign= page.locator("#wrapper").get_by_text("Requisition Assign", exact=True) #will show assign unassign and others options
-        self.undo_requisition_review = page.get_by_role("link", name="Undo Requisition Review")
-        self.framework_active_list = page.get_by_role("link", name="Framework Active List")
         #under requisition assign
         self.requisition_accept_list= page.get_by_role("link", name="Requisition Accept List")
+        self.assign_requisition = page.get_by_role("link", name="Assign Requisition", exact=True)
         self.unassign_requisition = page.get_by_role("link", name="Unassign Requisition")
-        self.assigrequisition_bpd_list = page.get_by_role("link", name="Requisition BPD List")
 
-        self.procurement_process = page.locator("#wrapper").get_by_text("Procurement Process")
+        self.procurement_process = page.locator("#wrapper").get_by_text("Procurement Process", exact=True)
         #under procurement process
-        self.creare_tender_initiation = page.get_by_role("link", name="Create Tender Initiation")
+        self.create_tender_initiation = page.get_by_role("link", name="Create Tender Initiation")
         self.tender_initiation_list = page.get_by_role("link", name="Tender Initiation List")
-        self.tender_committee_formation = page.get_by_role("link", name="Tender Committee Formation")
-        self.tender_time_extension = page.locator("#wrapper").get_by_text("Tender Time Extension")
-        #under time extension
-        self.time_extention_list = page.get_by_role("link", name="Time Extension List")
-        self.create_time_extension = page.get_by_role("link", name="Create Time Extension")
 
-        self.pre_bid_meeting = page.get_by_role("link", name="Pre Bid Meeting")
-        self.change_purchase_approver = page.get_by_role("link", name="Change Purchase Approver")
-        self.lock_unlock_requisition_item = page.locator("#wrapper").get_by_text("Lock Unlock Requisition Item")
-        #under lock unlock requisition item
-        self.create_lock_item = page.get_by_role("link", name="Create Lock Item")
-        self.locked_item_list = age.get_by_role("link", name="Locked Item List", exact=True)
-        self.create_unlock_item = page.get_by_role("link", name="Create Unlock Item")
-        self.unlock_item_list = page.get_by_role("link", name="Unlocked Item List")
-
-        self.expression_of_interest = page.get_by_role("link", name="Expression of Interest")
-        self.noal_list = page.get_by_role("link", name="NOAL List")
-        self.create_framework_initiation = page.get_by_role("link", name="Create Framework Initiation")
-        
-        self.purchase_order = page.locator("#wrapper").get_by_text("Purchase Order")
+        self.purchase_order =  page.locator('//div[text()="Purchase Order"]')
         #under purchase order
-        self.work_order = page.locator("#wrapper").get_by_text("Work Order", exact=True)
-        #under work order
-        self.create_work_order = page.get_by_role("link", name="Create Work Order")
-        self.work_order_list = page.get_by_role("link", name="Work Order List")
-        self.ps_info_verify = page.get_by_role("link", name="Ps Info Verify")
-        self.order_time_extention_tools = page.get_by_role("link", name="Order Time Extension Tools")
+        self.direct_purchase = page.locator("div").filter(has_text=re.compile(r"^Direct Purchase$")).locator("span")
 
-        self.direct_purchase = page.locator("#wrapper").get_by_text("Direct Purchase", exact=True)
         #under direct purchase
-        self.Create_direct_purchase = page.get_by_role("link", name="Create Direct Purchase")
+        self.create_direct_purchase = page.get_by_role("link", name="Create Direct Purchase")
         self.direct_purchase_list = page.get_by_role("link", name="Direct Purchase List")
 
+        self.item_receive = page.locator("#wrapper").get_by_role("listitem").filter(has_text="Item Receive Item Receive").locator("div")
+        #under item receive
+        self.create_item_receive = page.locator("#wrapper").get_by_role("link", name="Item Receive", exact=True)
+        self.item_receive_list = page.get_by_role("link", name="Item Receive List")
+
+        self.bill_payable = page.locator("#wrapper").get_by_role("listitem").filter(has_text="Bill Payable Create Vendor").locator("div")
+        #under bill payable
+        self.create_vendor_bill_payable = page.get_by_role("link", name="Create Vendor Bill Payable")
+        self.vendor_billing_list = page.get_by_role("link", name="Vendor Billing List")
 
 
+
+    def click_requisition(self):
+        self.requisition.wait_for(state="visible")
+        self.requisition.click()
+        self.requisition.wait_for(state="visible")
+
+    def click_create_requisition(self):
+        self.create_requisition.wait_for(state="visible")
+        self.create_requisition.click()
+        self.wait_for_timeout(1000)  
+    
+    def click_requisition_list(self):
+        self.requisition_list.wait_for(state="visible")
+        self.requisition_list.click()
+        self.wait_for_timeout(1000)
+    
+    def click_requisition_approval_list(self):
+        self.requisition_approval_list.wait_for(state="visible")
+        self.requisition_approval_list.click()
+        self.requisition_approval_list.wait_for(state="visible")
+    
+    def click_requisition_assign(self):
+        self.requisition_assign.wait_for(state="visible")
+        self.requisition_assign.click()
+        self.requisition_assign.wait_for(state="visible")
+
+    def click_assign_requisition(self):
+        self.assign_requisition.wait_for(state="visible")
+        self.assign_requisition.click()
+        self.assign_requisition.wait_for(state="visible")
+
+    def click_unassign_requisition(self):  
+        self.unassign_requisition.wait_for(state="visible")
+        self.unassign_requisition.click()
+        
+    def click_requisition_accept_list(self):
+        self.requisition_accept_list.wait_for(state="visible")
+        self.requisition_accept_list.click()
+        self.wait_for_timeout(1000)
+    
+    def click_procurement_process(self):
+        self.procurement_process.wait_for(state="visible")
+        self.procurement_process.click()
+        self.wait_for_timeout(1000)
+    
+    def click_create_tender_initiation(self):
+        self.create_tender_initiation.wait_for(state="visible")
+        self.create_tender_initiation.click()
+        self.wait_for_timeout(1000)
+
+    def click_tender_initiation_list(self):
+        self.tender_initiation_list.wait_for(state="visible")
+        self.tender_initiation_list.click()
+        self.wait_for_timeout(1000)
+    
+    def click_purchase_order(self):
+        self.purchase_order.wait_for(state="visible")
+        self.purchase_order.click()
+        self.wait_for_timeout(1000)
+    
+    def click_direct_purchase(self):
+        self.direct_purchase.wait_for(state="visible")
+        self.direct_purchase.click()
+        self.wait_for_timeout(1000)
+
+    def click_create_direct_purchase(self):
+        self.create_direct_purchase.wait_for(state="visible")
+        self.create_direct_purchase.click()
+        self.wait_for_timeout(5000)
+
+    def click_direct_purchase_list(self):
+        self.direct_purchase_list.wait_for(state="visible")
+        self.direct_purchase_list.click()
+        self.wait_for_timeout(1000)
+
+    def click_item_receive(self):
+        self.item_receive.wait_for(state="visible")
+        self.item_receive.click()
+        self.wait_for_timeout(1000)
+    
+    def click_create_item_receive(self):
+        self.create_item_receive.wait_for(state="visible")
+        self.create_item_receive.click()
+        self.wait_for_timeout(1000)
+
+    def click_item_receive_list(self):
+        self.item_receive_list.wait_for(state="visible")
+        self.item_receive_list.click()
+        self.wait_for_timeout(1000)
+
+    def click_bill_payable(self):
+        self.bill_payable.wait_for(state="visible")
+        self.bill_payable.click()
+        self.wait_for_timeout(1000)
+    
+    def click_create_vendor_bill_payable(self):
+        self.create_vendor_bill_payable.wait_for(state="visible")
+        self.create_vendor_bill_payable.click()
+        self.wait_for_timeout(1000)
+
+    def click_vendor_billing_list(self):
+        self.vendor_billing_list.wait_for(state="visible")
+        self.vendor_billing_list.click()
+        self.wait_for_timeout(1000)
+    
 
 
 
