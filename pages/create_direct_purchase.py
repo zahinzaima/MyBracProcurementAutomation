@@ -24,6 +24,10 @@ class CreateDirectPurchase(ProcurementHomePage, BasicActions):
         # self.location_other = self.page.get_by_role("option", name="Other")
         # self.location_select_delivery_location = self.page.get_by_role("option", name="-Select Delivery Location -")
         self.template_selection_dropdown = page.locator("#purchaseLetterBodyTemplateId")
+        self.direct_purchase_approver = page.locator("#signatoryMemberDiv_input")
+        self.direct_purchase_approver_selection = page.get_by_text(TestResources.test_purchase_approver)
+        self.purchase_submit = page.get_by_role("button", name="Submit")
+        self.purchase_submit_confirmation = page.get_by_label("Submit Confirmation").get_by_role("button", name="Submit")
 
 
     def search_vendor(self, vendor_name: str):
@@ -104,5 +108,24 @@ class CreateDirectPurchase(ProcurementHomePage, BasicActions):
         self.wait_for_timeout(5000)
 
     def template_selection(self , template: str = "Direct Purchase Order Template"):
+        self.template_selection_dropdown.scroll_into_view_if_needed()
         self.select_from_list_by_value(self.template_selection_dropdown, template)
-        
+    
+    def direct_purchase_approver_selecting(self, approver: str):
+        self.direct_purchase_approver.scroll_into_view_if_needed()
+        self.direct_purchase_approver.fill(approver)
+        self.page.keyboard.press("End")
+        self.page.keyboard.type(" ")
+        self.page.keyboard.press("Backspace")
+        self.direct_purchase_approver_selection.wait_for(state="visible", timeout=5000)
+        self.direct_purchase_approver_selection.hover()
+        self.direct_purchase_approver_selection.click()
+
+    def submit_direct_purchase(self):
+        self.purchase_submit.scroll_into_view_if_needed()
+        self.purchase_submit.click()
+        self.wait_for_timeout(2000)
+    def confirm_submission(self):
+        self.purchase_submit_confirmation.scroll_into_view_if_needed()
+        self.purchase_submit_confirmation.click()
+        self.wait_for_timeout(5000)

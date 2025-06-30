@@ -93,6 +93,9 @@ def test_four(resource):
         r_page.select_all_items()
         r_page.save_and_next()
         r_page.template_selection()
+        r_page.direct_purchase_approver_selecting(TestResources.test_purchase_approver)
+        r_page.submit_direct_purchase()
+        r_page.confirm_submission()
         r_page.get_full_page_screenshot('modular_test_4')
     except Exception as e:
         r_page.get_full_page_screenshot('test_4_error')

@@ -9,8 +9,6 @@ class TestResources:
     test_requisition_assignee = "00000761"
     test_requisition_number="REQ20250004299"
     test_vendor_name = "Skylark Printers"
-    
-
-     
+    test_purchase_approver = "00138486"
 
     #erp_url = "https://env28.erp.bracits.net/"
