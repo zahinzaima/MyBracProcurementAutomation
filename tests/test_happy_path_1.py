@@ -34,6 +34,7 @@ def resource():
 
 
 def test_one(resource):
+    print("Test One")
     s_page  = LoginPage(resource)
     s_page.navigate_to_url(TestResources.test_url)
     s_page.perform_login(
@@ -43,6 +44,7 @@ def test_one(resource):
     #s_page.get_screen_shot('modular_test_1')
 
 def test_two(resource):
+    print("Test Two")
     r_page = DashboardPage(resource)
     try:
         r_page.closing_add()
@@ -160,6 +162,7 @@ def test_four(resource):
 #         raise e
     
 
+<<<<<<< HEAD
 # def test_seven(resource):
 #     r_page = AssignRequisition(resource)
 #     try:
@@ -171,6 +174,20 @@ def test_four(resource):
 #     except Exception as e:
 #         r_page.get_full_page_screenshot('test_12_error')
 #         raise e
+=======
+def test_seven(resource):
+    print("Test Seven")
+    r_page = AssignRequisition(resource)
+    try:
+        r_page.navigate_to_url("https://env28.erp.bracits.net/procurementDashboard/myDashboard#!/requisition/assignRequisitions")
+        r_page.assigning_person(assigned_person=TestResources.test_requisition_assignee)
+        r_page.search_requisition_for_assigning(requisition_number=TestResources.test_requisition_number)
+        r_page.add_item_to_assign()
+        r_page.get_full_page_screenshot('modular_test_12')
+    except Exception as e:
+        r_page.get_full_page_screenshot('test_12_error')
+        raise e
+>>>>>>> 1b94c398858621bbb62e2556c3ce5cd90f000609
     
 # def test_eight(resource):
 #     r_page = RequisitionAcceptList(resource)
