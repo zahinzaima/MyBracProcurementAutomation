@@ -8,3 +8,4 @@ __pychache__
 /artifacts
 /.venv
 .venv
+/.pytest_cache

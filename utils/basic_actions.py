@@ -61,3 +61,14 @@ class BasicActions:
         self.page.get_by_text(text, exact=True).click()
         self.page.keyboard.press("Enter")
         self.page.wait_for_timeout(5000)
+
+    
+    def select_option_from_dropdown(self, elem, text):
+        elem.wait_for(state='visible')
+        elem.click()
+        elem.fill(text)
+        # Wait for the dropdown options to appear
+        self.page.wait_for_selector(f'div:text-matches("{text}", "i")', state='visible')
+        # Click on the first matching option
+        self.page.get_by_text(text).click()       
+        
