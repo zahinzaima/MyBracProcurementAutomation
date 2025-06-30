@@ -92,6 +92,7 @@ def test_four(resource):
         r_page.search_item_by_name(TestResources.test_requisition_number)
         r_page.select_all_items()
         r_page.save_and_next()
+        r_page.template_selection()
         r_page.get_full_page_screenshot('modular_test_4')
     except Exception as e:
         r_page.get_full_page_screenshot('test_4_error')
@@ -160,9 +161,7 @@ def test_four(resource):
 #     except Exception as e:
 #         r_page.get_full_page_screenshot('test_four_error')
 #         raise e
-    
-
-<<<<<<< HEAD
+# <<<<<<< HEAD
 # def test_seven(resource):
 #     r_page = AssignRequisition(resource)
 #     try:
@@ -174,20 +173,20 @@ def test_four(resource):
 #     except Exception as e:
 #         r_page.get_full_page_screenshot('test_12_error')
 #         raise e
-=======
-def test_seven(resource):
-    print("Test Seven")
-    r_page = AssignRequisition(resource)
-    try:
-        r_page.navigate_to_url("https://env28.erp.bracits.net/procurementDashboard/myDashboard#!/requisition/assignRequisitions")
-        r_page.assigning_person(assigned_person=TestResources.test_requisition_assignee)
-        r_page.search_requisition_for_assigning(requisition_number=TestResources.test_requisition_number)
-        r_page.add_item_to_assign()
-        r_page.get_full_page_screenshot('modular_test_12')
-    except Exception as e:
-        r_page.get_full_page_screenshot('test_12_error')
-        raise e
->>>>>>> 1b94c398858621bbb62e2556c3ce5cd90f000609
+# =======
+# def test_seven(resource):
+#     print("Test Seven")
+#     r_page = AssignRequisition(resource)
+#     try:
+#         r_page.navigate_to_url("https://env28.erp.bracits.net/procurementDashboard/myDashboard#!/requisition/assignRequisitions")
+#         r_page.assigning_person(assigned_person=TestResources.test_requisition_assignee)
+#         r_page.search_requisition_for_assigning(requisition_number=TestResources.test_requisition_number)
+#         r_page.add_item_to_assign()
+#         r_page.get_full_page_screenshot('modular_test_12')
+#     except Exception as e:
+#         r_page.get_full_page_screenshot('test_12_error')
+#         raise e
+# >>>>>>> 1b94c398858621bbb62e2556c3ce5cd90f000609
     
 # def test_eight(resource):
 #     r_page = RequisitionAcceptList(resource)

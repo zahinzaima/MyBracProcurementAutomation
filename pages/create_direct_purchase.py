@@ -23,6 +23,7 @@ class CreateDirectPurchase(ProcurementHomePage, BasicActions):
         # self.location_head_office = self.page.get_by_role("option", name="Head Office")
         # self.location_other = self.page.get_by_role("option", name="Other")
         # self.location_select_delivery_location = self.page.get_by_role("option", name="-Select Delivery Location -")
+        self.template_selection_dropdown = page.locator("#purchaseLetterBodyTemplateId")
 
 
     def search_vendor(self, vendor_name: str):
@@ -58,6 +59,7 @@ class CreateDirectPurchase(ProcurementHomePage, BasicActions):
         # self.delivery_location_dropdown.click()
         self.select_from_list_by_value(self.delivery_location_dropdown, delivery_location)
 
+    
     # def delivery_location_central_store(self):
     #     self.location_central_store.hover()
     #     self.location_central_store.click()
@@ -100,4 +102,7 @@ class CreateDirectPurchase(ProcurementHomePage, BasicActions):
         self.save_next_page.scroll_into_view_if_needed()
         self.save_next_page.click()
         self.wait_for_timeout(5000)
+
+    def template_selection(self , template: str = "Direct Purchase Order Template"):
+        self.select_from_list_by_value(self.template_selection_dropdown, template)
         
