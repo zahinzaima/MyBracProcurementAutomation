@@ -14,6 +14,9 @@ from pages.requisition_accept_list import RequisitionAcceptList
 from pages.main_navigation_bar import MainNavigationBar
 from utils.basic_actions import BasicActions       
 from playwright.sync_api import sync_playwright
+from pages.procurement_page_navigation_bar import ProcurementPageNavigationBar
+from pages.create_tender_initiation import CreateTenderInitiation 
+from pages.create_direct_purchase import CreateDirectPurchase  
 
 
 install()
@@ -43,11 +46,56 @@ def test_two(resource):
     r_page = DashboardPage(resource)
     try:
         r_page.closing_add()
+        r_page.goto_procurement()
         r_page.get_full_page_screenshot('modular_test_2')
     except Exception as e:
         r_page.get_full_page_screenshot('test_2_error')
         raise e
+
+def test_three(resource):
+    r_page = ProcurementPageNavigationBar(resource)
+    try:
+        r_page.click_purchase_order()
+        r_page.click_direct_purchase()
+        r_page.click_create_direct_purchase()
+        r_page.get_full_page_screenshot('modular_test_3')
+    except Exception as e:
+        r_page.get_full_page_screenshot('test_3_error')
+        raise e
     
+# def test_four(resource): 
+#     r_page = CreateTenderInitiation(resource)
+#     try:
+        
+#         r_page.search_requisition(TestResources.test_requisition_number)
+#         r_page.select_all_items()
+#         r_page.select_direct_purchase_method()
+#         r_page.fill_remarks("This is a test remark for the tender initiation.")
+#         r_page.submit_tender_initiation()
+#         r_page.confirm_submission()
+#         # r_page.get_full_page_screenshot('modular_test_7')
+#     except Exception as e:
+#         r_page.get_full_page_screenshot('test_4_error')
+#         raise e
+
+def test_four(resource):
+    r_page = CreateDirectPurchase(resource)
+    try:
+        r_page.search_vendor(TestResources.test_vendor_name)
+        r_page.same_delivery_schedule()
+        r_page.estimated_delivery_date_with_text("24/11/2026")
+        r_page.delivery_location_dropdown_select()
+        # r_page.delivery_location_Other()
+        r_page.delivery_location("Dhaka, Bangladesh")
+        r_page.search_item_by_name(TestResources.test_requisition_number)
+        r_page.select_all_items()
+        r_page.save_and_next()
+        r_page.get_full_page_screenshot('modular_test_4')
+    except Exception as e:
+        r_page.get_full_page_screenshot('test_4_error')
+        raise e
+
+
 # def test_two(resource):
 #     d_page = DashboardPage(resource)
 #     d_page.goto_procurement()
@@ -112,17 +160,17 @@ def test_two(resource):
 #         raise e
     
 
-def test_seven(resource):
-    r_page = AssignRequisition(resource)
-    try:
-        r_page.navigate_to_url("https://env28.erp.bracits.net/procurementDashboard/myDashboard#!/requisition/assignRequisitions")
-        r_page.assigning_person(assigned_person=TestResources.test_requisition_assignee)
-        r_page.search_requisition_for_assigning(requisition_number=TestResources.test_requisition_number)
-        r_page.add_item_to_assign()
-        r_page.get_full_page_screenshot('modular_test_12')
-    except Exception as e:
-        r_page.get_full_page_screenshot('test_12_error')
-        raise e
+# def test_seven(resource):
+#     r_page = AssignRequisition(resource)
+#     try:
+#         r_page.navigate_to_url("https://env28.erp.bracits.net/procurementDashboard/myDashboard#!/requisition/assignRequisitions")
+#         r_page.assigning_person(assigned_person=TestResources.test_requisition_assignee)
+#         r_page.search_requisition_for_assigning(requisition_number=TestResources.test_requisition_number)
+#         r_page.add_item_to_assign()
+#         r_page.get_full_page_screenshot('modular_test_12')
+#     except Exception as e:
+#         r_page.get_full_page_screenshot('test_12_error')
+#         raise e
     
 # def test_eight(resource):
 #     r_page = RequisitionAcceptList(resource)
