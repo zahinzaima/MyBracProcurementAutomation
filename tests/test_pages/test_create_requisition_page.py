@@ -9,20 +9,21 @@ def run(playwright: Playwright) -> None:
     page = context.new_page()
     rf = TestResources()
     print("Starting the test... with RF value:", rf.practice_value)
+    # Perform Login
     page.goto("https://env28.erp.bracits.net/idp/realms/brac/protocol/openid-connect/auth?client_id=erp&redirect_uri=https%3A%2F%2Fenv28.erp.bracits.net&state=dGltZToxNzUxMjg1NDUyOTMwfHVybDpudWxs&response_type=code&scope=openid&kc_idp_hint=")
     page.get_by_role("textbox", name="Username").click()
     page.get_by_role("textbox", name="Username").fill("197363")
-    page.get_by_role("textbox", name="Password").click()
-    page.get_by_role("textbox", name="Password").fill("abc1234$")
-    page.get_by_role("textbox", name="Password").press("Enter")
-    page.get_by_role("button", name="Sign In").click()
-    page.get_by_role("textbox", name="Password").click()
+    page.get_by_role("textbox", name="Password").click()    
     page.get_by_role("textbox", name="Password").fill("abc123$")
     page.get_by_role("button", name="Sign In").click()
+    # Closing the popup if it appears
     page.locator("//*[@class='close-button']").click()
+    # Navigate to Procurement Home Page
     page.get_by_role("link", name="PROCUREMENT", exact=True).click()
+    # Navigate to Create Requisition Page
     page.get_by_text("Requisition", exact=True).first.click()
     page.get_by_role("link", name="Create Requisition").click()
+    # Actions performed on Create Requisition Page    
     page.locator("#self").check()
     page.locator("#projectInfoDiv_arrow").click()
     page.get_by_text("[H04] - Procurement-BRAC").click()
