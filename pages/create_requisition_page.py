@@ -16,7 +16,7 @@ class CreateRequisitionPage(ProcurementHomePage, BasicActions):
 
         self.proc_item_project = page.locator('css=#projectInfoDiv_input')
         self.proc_item_project_dropdown = page.locator('#projectInfoDiv_arrow')
-        self.proc_item_source_of_fund = page.locator('//*[@id="sourceOfFundDiv_input"]') #page.locator('css=#sourceOfFundDiv_arrow')
+        self.proc_item_source_of_fund = page.locator('#sourceOfFundDiv_input') #page.locator('css=#sourceOfFundDiv_arrow')
         self.proc_item_remarks = page.get_by_role("textbox", name="Max size of requisition remarks 300 characters")
 
         self.proc_item_information = page.locator('css=#itemInfo')
@@ -47,7 +47,7 @@ class CreateRequisitionPage(ProcurementHomePage, BasicActions):
         self.submit_button = page.get_by_role("button", name=re.compile("submit", re.IGNORECASE))
         self.confirm_submit_button = page.locator('css=button[role="button"] span[class="ui-button-text"]')
         # requisition number elements
-        self.requisition_message = page.locator('//div[@class="message"]')
+        self.requisition_message = page.get_by_text("Procurement Requisition", exact=True) #page.locator('//div[@class="message"]')
         # self.requisition_message_2 = page.locator('//div[@class="message"]')
         # self.requisition_message = page.get_by_text("Procurement Requisition", exact=True)
 
@@ -73,6 +73,9 @@ class CreateRequisitionPage(ProcurementHomePage, BasicActions):
 
 
     def set_requisition_information(self, source_of_fund, remarks):
+        # self.proc_item_source_of_fund.click()
+        # self.input_in_element(self.proc_item_source_of_fund, 'Brac F')
+        # self.page.get_by_text().click(source_of_fund)
         self.select_option_from_dropdown(self.proc_item_source_of_fund, source_of_fund)
         self.input_in_element(self.proc_item_remarks, remarks)
 

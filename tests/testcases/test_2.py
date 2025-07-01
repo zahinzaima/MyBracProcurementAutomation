@@ -11,6 +11,7 @@ from rich.traceback import install
 install()
 
 tr = TestResources()
+
 def test_one(page):    
     print("TR:", tr.practice_value)
     s_page  = LoginPage(page)
@@ -26,15 +27,6 @@ def test_one(page):
         raise e
     #s_page.get_screen_shot('modular_test_1')
 
-# def test_two(resource):
-#     d_page = DashboardPage(resource)
-#     d_page.goto_procurement()
-# #     #d_page.get_screen_shot('modular_test_2')
-#
-# def test_three(resource):
-#     p_page = ProcurementHomePage(resource)
-#     p_page.navigate_to_create_requisition()
-#     #p_page.get_screen_shot('modular_test_3')
 
 def test_four(page):
     c_page = CreateRequisitionPage(page)    
@@ -47,7 +39,7 @@ def test_four(page):
             True,
             "[H04] - Procurement-BRAC")
         c_page.set_requisition_information(
-            "BRAC",#"112BRAC",
+            "BRAC Fund",
             "requisition remarks")
         c_page.set_requisition_details(
             "[19190]-Glue-(Supplies and Stationeries->Supplies and Stationeries->Stationery)",
@@ -74,15 +66,3 @@ def test_four(page):
     except Exception as e:
         c_page.get_full_page_screenshot('test_four_error')
         raise e
-
-# def test_five(resource):
-#     r_page = RequisitionApproveList(resource)
-#     try:
-#         r_page.navigate_to_url("https://env28.erp.bracits.net/procurementDashboard/myDashboard#!/requisition/authorizationList")
-#         r_page.search_requisition("REQ20250004335")
-#         r_page.select_requisition()
-#         r_page.approve_requisition()
-#         r_page.get_full_page_screenshot('modular_test_10')
-#     except Exception as e:
-#         r_page.get_full_page_screenshot('test_five_error')
-#         raise e
