@@ -109,10 +109,11 @@ class CreateDirectPurchase(ProcurementHomePage, BasicActions):
         self.save_next_page.click()
         self.wait_for_timeout(5000)
 
-    def get_purchase_order_number(self) :
-        po_number = self.purchase_order_no_field.input_value()
-        print("Generated Purchase Order Number:", po_number)
-        po_value = po_number 
+    def get_purchase_order_number(self) -> str:
+        self.po_value = self.purchase_order_no_field.input_value()
+        print("Generated Purchase Order Number:", self.po_value)
+        return self.po_value
+        #po_value = po_number 
         
 
     def template_selection(self , template: str = "Direct Purchase Order Template"):
