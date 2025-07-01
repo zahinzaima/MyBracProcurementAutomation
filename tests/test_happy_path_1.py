@@ -16,7 +16,8 @@ from utils.basic_actions import BasicActions
 from playwright.sync_api import sync_playwright
 from pages.procurement_page_navigation_bar import ProcurementPageNavigationBar
 from pages.create_tender_initiation import CreateTenderInitiation 
-from pages.create_direct_purchase import CreateDirectPurchase  
+from pages.create_direct_purchase import CreateDirectPurchase 
+from pages.direct_purchase_list import DirectPurchaseList 
 
 
 install()
@@ -92,6 +93,7 @@ def test_four(resource):
         r_page.search_item_by_name(TestResources.test_requisition_number)
         r_page.select_all_items()
         r_page.save_and_next()
+        r_page.get_purchase_order_number()
         r_page.template_selection()
         r_page.direct_purchase_approver_selecting(TestResources.test_purchase_approver)
         r_page.submit_direct_purchase()
@@ -99,6 +101,18 @@ def test_four(resource):
         r_page.get_full_page_screenshot('modular_test_4')
     except Exception as e:
         r_page.get_full_page_screenshot('test_4_error')
+        raise e
+    
+def test_five(resource):
+    r_page = DirectPurchaseList(resource)
+    try:
+        r_page.search_purchase_order()
+        # r_page.select_direct_purchase_order()
+        # r_page.approve_direct_purchase()
+        # r_page.confirmation_message_approve()
+        # r_page.get_full_page_screenshot('modular_test_5')
+    except Exception as e:
+        r_page.get_full_page_screenshot('test_5_error')
         raise e
 
 

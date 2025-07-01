@@ -6,8 +6,10 @@ from playwright.sync_api import expect
 
 
 class CreateDirectPurchase(ProcurementHomePage, BasicActions):
+    
     def __init__(self, page):
         super().__init__(page)
+        self.po_value = ''
         self.vendor_info = page.get_by_role("textbox", name="Min 3 characters")
         self.search_result = page.get_by_text(TestResources.test_vendor_name)
         self.select_all_checkbox = page.get_by_role("link", name="Select All", exact=True)
@@ -28,7 +30,7 @@ class CreateDirectPurchase(ProcurementHomePage, BasicActions):
         self.direct_purchase_approver_selection = page.get_by_text(TestResources.test_purchase_approver)
         self.purchase_submit = page.get_by_role("button", name="Submit")
         self.purchase_submit_confirmation = page.get_by_label("Submit Confirmation").get_by_role("button", name="Submit")
-
+        self.purchase_order_no_field = page.locator("#refNo")
 
     def search_vendor(self, vendor_name: str):
         self.vendor_info.fill(vendor_name)
@@ -106,6 +108,12 @@ class CreateDirectPurchase(ProcurementHomePage, BasicActions):
         self.save_next_page.scroll_into_view_if_needed()
         self.save_next_page.click()
         self.wait_for_timeout(5000)
+
+    def get_purchase_order_number(self) :
+        po_number = self.purchase_order_no_field.input_value()
+        print("Generated Purchase Order Number:", po_number)
+        po_value = po_number 
+        
 
     def template_selection(self , template: str = "Direct Purchase Order Template"):
         self.template_selection_dropdown.scroll_into_view_if_needed()
