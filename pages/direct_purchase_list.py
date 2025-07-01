@@ -20,10 +20,10 @@ class DirectPurchaseList(CreateDirectPurchase):
         self.confirmation_message_approve = page.locator('button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-only', has_text="Approve")
         self.direct_purchase_details_page_approve=page.get_by_role("button", name=re.compile("Approve", re.IGNORECASE))
 
-    def search_purchase_order(self):
+    def search_purchase_order(self, purchase_order_number):
         self.search_box.scroll_into_view_if_needed()
-        print("Searching for Purchase Order Number:", self.po_value_2)
-        self.search_box.fill(self.po_value_2)
+        print("Searching for Purchase Order Number:", purchase_order_number)
+        self.search_box.fill(purchase_order_number)
         self.page.keyboard.press("Enter")
         self.page.wait_for_timeout(5000)
     
