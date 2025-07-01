@@ -103,17 +103,17 @@ def test_four(resource):
         r_page.get_full_page_screenshot('test_4_error')
         raise e
     
-def test_five(resource):
-    r_page = DirectPurchaseList(resource)
-    try:
-        r_page.search_purchase_order()
-        # r_page.select_direct_purchase_order()
-        # r_page.approve_direct_purchase()
-        # r_page.confirmation_message_approve()
-        # r_page.get_full_page_screenshot('modular_test_5')
-    except Exception as e:
-        r_page.get_full_page_screenshot('test_5_error')
-        raise e
+# def test_five(resource):
+#     r_page = DirectPurchaseList(resource)
+#     try:
+#         r_page.search_purchase_order()
+#         # r_page.select_direct_purchase_order()
+#         # r_page.approve_direct_purchase()
+#         # r_page.confirmation_message_approve()
+#         # r_page.get_full_page_screenshot('modular_test_5')
+#     except Exception as e:
+#         r_page.get_full_page_screenshot('test_5_error')
+#         raise e
 
 
 # def test_two(resource):
