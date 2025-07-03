@@ -3,6 +3,7 @@ pytest
 playwright
 pytest-playwright
 rich
+twisted
 
 # Testing utilities
 #pytest-playwright==0.3.0
