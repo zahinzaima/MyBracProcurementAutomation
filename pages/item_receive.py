@@ -9,7 +9,7 @@ class ItemReceive(ProcurementHomePage, BasicActions):
     def __init__(self, page):
         super().__init__(page)
         self.search_order = page.get_by_role("textbox", name="Search DP/FO/PO/CO Order No.")
-        self.search_order = page.get_by_text() #need help from bhaiyaaa po value kivabe dibooo
+        self.search_result = page.get_by_text() #need help from bhaiyaaa po value kivabe dibooo
         self.challan_no = page.locator("#challanNo")
         self.challan_date = page.locator("#challanDate")
         self.receive_date = page.locator("#receiveDate")
@@ -21,13 +21,14 @@ class ItemReceive(ProcurementHomePage, BasicActions):
         self.submit_confirmation = page.get_by_label("Submit Confirmation").get_by_role("button", name="Submit")
 
     def search_order_for_item_receive(self, oder_no: str):
-        self.search_order(oder_no)
+        self.search_order.fill(oder_no)
         self.page.keyboard.press("End")
         self.page.keyboard.type(" ")
         self.page.keyboard.press("Backspace") 
-        self.search_result.wait_for(state="visible", timeout=5000)
-        self.search_result.hover()
-        self.search_result.click()
+        s_result = self.page.get_by_text(oder_no)
+        s_result.wait_for(state="visible", timeout=5000)
+        s_result.hover()
+        s_result.click()
 
     def challan_date(self, date: str):
         # Fill the challan date input field
