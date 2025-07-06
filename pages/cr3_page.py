@@ -57,7 +57,6 @@ class CreateReqPage(ProcurementHomePage, BasicActions):
         self.page.keyboard.press(' ')
         self.wait_for_timeout(2500)
         self.page.get_by_text(item_info_2).click()
-        self.page.get_by_role("menuitem", name=item_info_2).click()
         self.item_measure_selector.click()
         self.page.locator('//*[@id="17"]').click()
         self.item_tor_selector.fill(item_tor)
