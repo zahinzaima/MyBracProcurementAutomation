@@ -54,9 +54,17 @@ class CreateReqPage(ProcurementHomePage, BasicActions):
     def setting_requisition_details(self, item_info_1, item_info_2, item_tor, qty, unit_price):
         self.item_info_selector.click()
         self.item_info_selector.fill(item_info_1)
+<<<<<<< HEAD
         self.page.keyboard.press(' ')
         self.wait_for_timeout(2500)
         self.page.get_by_text(item_info_2).click()
+=======
+        self.page.get_by_role("menuitem", name=item_info_2).click()
+        # The above line is used to select the second item from the dropdown.
+        #self.page.get_by_text(item_info_2).click()
+        # self.wait_for_timeout(5000)
+
+>>>>>>> 62665d46be37934097a2d85ab99220cab75bc170
         self.item_measure_selector.click()
         self.page.locator('//*[@id="17"]').click()
         self.item_tor_selector.fill(item_tor)
