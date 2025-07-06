@@ -32,6 +32,8 @@ class CreateReqPage(ProcurementHomePage, BasicActions):
         self.add_to_grid_selector = page.get_by_role("button", name="Add to Grid")
         # element to save the requisition
         self.save_btn_selector = page.get_by_role("button", name="Save")
+        self.requisition_number = page.locator('//*[@id="jGrowl"]/div[2]/div[3]')
+
 
     def validate(self):
         expect(self.validation_point).to_be_visible()
@@ -49,14 +51,14 @@ class CreateReqPage(ProcurementHomePage, BasicActions):
         self.fund_source_remarks_selector.fill(fund_remarks)
 
 
-    def setting_requisition_details(self, item_info_1, item_info_2, item_measure, item_tor, qty, unit_price):
+    def setting_requisition_details(self, item_info_1, item_info_2, item_tor, qty, unit_price):
         self.item_info_selector.click()
-        self.item_info_selector.fill(item_info_2)
-        # self.page.get_by_text(item_info_2).click()
-        # self.wait_for_timeout(5000)
-
+        self.item_info_selector.fill(item_info_1)
+        self.page.keyboard.press(' ')
+        self.wait_for_timeout(2500)
+        self.page.get_by_text(item_info_2).click()
         self.item_measure_selector.click()
-        self.page.get_by_text(item_measure).click()
+        self.page.locator('//*[@id="17"]').click()
         self.item_tor_selector.fill(item_tor)
         self.item_qty_selector.fill(qty)
         self.item_unit_price_selector.fill(unit_price)
@@ -78,3 +80,8 @@ class CreateReqPage(ProcurementHomePage, BasicActions):
         self.add_to_grid_selector.click()
         self.wait_for_timeout(5000)
         self.save_btn_selector.click()
+        self.wait_to_load_element(self.requisition_number)
+        value = self.requisition_number.text_content()
+        print(value)
+        val = value.split(' ')
+        print("Last Value: " + val[-1])

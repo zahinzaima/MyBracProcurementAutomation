@@ -28,7 +28,7 @@ class BasicActions:
     @staticmethod
     def wait_to_load_element(elem):
         elem.wait_for(state='visible')
-        print('waited for the elem')
+        #print('waited for the elem')
 
     @staticmethod
     def click_on_btn(btn):
