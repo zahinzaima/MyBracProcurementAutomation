@@ -1,4 +1,4 @@
-.env
+**/.env
 /resources
 /screenshots
 /screenshots_taken
@@ -7,6 +7,6 @@
 /report
 /__pychache__
 __pychache__
-*.pyc
+**/.pyc
 /artifacts
 /.pytest_cache
