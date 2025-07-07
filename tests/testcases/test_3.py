@@ -1,22 +1,30 @@
 # this page contains all the test cases for the samplePage
-from resources.resource_file import TestResources
+#from resources.resource_file import TestResources
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+proj_url = os.getenv("test_url")
+proj_user = os.getenv("test_user_name")
+proj_pass = os.getenv("test_user_pass")
+
 # Page models
 from pages.login_page import LoginPage
 from pages.dashboard_page import DashboardPage
 from pages.procurement_home_page import ProcurementHomePage
 from pages.cr3_page import CreateReqPage
 
+# Import for beautiful reporting
 from rich.traceback import install
 install()
 
-tr = TestResources()
 
 def test_one(page):
     s_page  = LoginPage(page)
-    s_page.navigate_to_url(TestResources.test_url)
+    s_page.navigate_to_url(proj_url)
     s_page.perform_login(
-        user_name=TestResources.test_user_name,
-        pass_word=TestResources.test_user_pass
+        user_name=proj_user,
+        pass_word=proj_pass
     )
 
 
