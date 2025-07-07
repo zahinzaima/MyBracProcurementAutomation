@@ -47,7 +47,8 @@ class CreateReqPage(ProcurementHomePage, BasicActions):
 
     def setting_requisition_information(self, fund_source, fund_remarks):
         self.fund_source_selector.fill(fund_source)
-        self.page.keyboard.press("Enter")
+        self.page.keyboard.press(" ")
+        self.page.get_by_text(fund_source, exact=True).click()
         self.fund_source_remarks_selector.fill(fund_remarks)
 
 
@@ -76,12 +77,12 @@ class CreateReqPage(ProcurementHomePage, BasicActions):
         #self.add_to_grid_selector.click()
 
 
-    def save_requisition(self):
+    def save_requisition(self) -> str:
         self.add_to_grid_selector.click()
         self.wait_for_timeout(5000)
         self.save_btn_selector.click()
         self.wait_to_load_element(self.requisition_number)
         value = self.requisition_number.text_content()
-        print(value)
-        val = value.split(' ')
-        print("Last Value: " + val[-1])
+        #print(value)
+        return value.split(' ')[-1]
+        #print("Last Value: " + val[-1])
