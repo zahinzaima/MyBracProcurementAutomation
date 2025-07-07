@@ -1,0 +1,14 @@
+**/.env
+/resources
+/screenshots
+/screenshots_taken
+/videos
+/traces
+/report
+/__pychache__
+__pychache__
+**/__pycache__
+**/.pyc
+*.pyc
+/artifacts
+/.pytest_cache
