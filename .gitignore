@@ -1,4 +1,5 @@
 /screenshots
+/screenshots_taken
 /videos
 /traces
 /report
@@ -6,6 +7,4 @@
 __pychache__
 *.pyc
 /artifacts
-/.venv
-.venv
 /.pytest_cache

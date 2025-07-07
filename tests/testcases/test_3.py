@@ -23,13 +23,13 @@ def test_one(page):
 def test_two(page):
     d_page = DashboardPage(page)
     d_page.goto_procurement()
-    d_page.get_screen_shot('modular_test_2')
+    d_page.get_full_page_screenshot('modular_test_2')
 
 
 def test_three(page):
     p_page = ProcurementHomePage(page)
     p_page.navigate_to_create_requisition()
-    p_page.get_screen_shot('modular_test_3')
+    p_page.get_full_page_screenshot('modular_test_3')
     p_page.wait_for_timeout(7500)
 
 
