@@ -3,7 +3,7 @@ from playwright.sync_api import expect
 import os
 
 
-class BasicActions:
+class BasicActionsDM:
     def __init__(self, page):
         self.page = page
 
@@ -32,6 +32,10 @@ class BasicActions:
 
     def is_element_visible(self, elem):
         return elem.is_visible()
+
+    @staticmethod
+    def click_on_openLoginFormBtn(openLoginFormBtn):
+        openLoginFormBtn.click()
 
     @staticmethod
     def click_on_btn(btn):
@@ -64,5 +68,3 @@ class BasicActions:
         self.page.get_by_text(text, exact=True).click()
         self.page.keyboard.press("Enter")
         self.page.wait_for_timeout(5000)
-
-
