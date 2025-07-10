@@ -11,4 +11,6 @@ __pychache__
 **/.pyc
 *.pyc
 /artifacts
-/.pytest_cache
+**/.pytest_cache
+**/venv
+**/.venv

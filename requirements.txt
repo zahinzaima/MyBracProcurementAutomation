@@ -3,4 +3,4 @@ pytest
 playwright
 pytest-playwright
 rich
-twisted
+python-dotenv
