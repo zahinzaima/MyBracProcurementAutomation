@@ -15,34 +15,34 @@ What to do first:
                         python -m venv venv
        for windows:       venv\Scripts\activate
        for linux/macOS:   source venv/bin/activate
-- Open a terminal, upgrade pip first, then do following
+- Open a terminal, upgrade pip first, then do the following
 
        python -m pip install --upgrade pip
        pip install -r requirements.txt
        playwright install
 
-What are being installed here:
+Tools installed here:
 
-Playwright -> An automation library to perform end-to-end web testing or web automation. -> https://playwright.dev/python/
+Playwright → An automation library to perform end-to-end web testing or web automation. → https://playwright.dev/python/
 
-Pytest -> A test framework. -> https://docs.pytest.org/en/stable/
+Pytest → A test framework. → https://docs.pytest.org/en/stable/
 
-Rich -> Renders Python tracebacks with syntax highlighting and formatting. -> https://rich.readthedocs.io/en/stable/traceback.html
+Rich → Renders Python tracebacks with syntax highlighting and formatting. → https://rich.readthedocs.io/en/stable/traceback.html
 
 
 What will we do:
 
-* We will be using POM design pattern here, where we will create web pages and store them in /pages folder,
+* We will be using the POM design pattern here, where we will create web pages and store them in /pages folder,
 
 * write our tests [test cases or test suites] in /tests/test_cases/ folder
 
-* create a .env file and store our required credentials there, just as shown in .env.example file
+* create a .env file and store our required credentials there, just as shown in the .env.example file
 
 * write commonly used methods to interact with in /utils folder
 
-How to run test:
+How to run the test:
 
-Run following command in Pycharm Terminal for preferred test run:
+Run the following command in the Pycharm Terminal for the preferred test run:
 
     -> To run all tests: pytest
 
