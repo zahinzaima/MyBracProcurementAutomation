@@ -8,8 +8,7 @@ from playwright.sync_api import expect
 class ItemReceive(ProcurementHomePage, BasicActions):
     def __init__(self, page):
         super().__init__(page)
-        self.search_order = page.get_by_role("textbox", name="Search DP/FO/PO/CO Order No.")
-        self.search_result = page.get_by_text() #need help from bhaiyaaa po value kivabe dibooo
+        self.search_order = page.get_by_role("textbox", name="Search DP/FO/PO/CO Order No.") 
         self.challan_no = page.locator("#challanNo")
         self.challan_date = page.locator("#challanDate")
         self.receive_date = page.locator("#receiveDate")
@@ -25,10 +24,10 @@ class ItemReceive(ProcurementHomePage, BasicActions):
         self.page.keyboard.press("End")
         self.page.keyboard.type(" ")
         self.page.keyboard.press("Backspace") 
-        s_result = self.page.get_by_text(oder_no)
-        s_result.wait_for(state="visible", timeout=5000)
-        s_result.hover()
-        s_result.click()
+        self.s_result = self.page.get_by_text(oder_no)
+        self.s_result.wait_for(state="visible", timeout=5000)
+        self.s_result.hover()
+        self.s_result.click()
 
     def challan_date(self, date: str):
         # Fill the challan date input field
