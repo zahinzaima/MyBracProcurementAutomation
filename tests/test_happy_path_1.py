@@ -18,6 +18,7 @@ from pages.procurement_page_navigation_bar import ProcurementPageNavigationBar
 from pages.create_tender_initiation import CreateTenderInitiation 
 from pages.create_direct_purchase import CreateDirectPurchase 
 from pages.direct_purchase_list import DirectPurchaseList 
+from pages.create_vendor_bill_payable import CreateVendorBillPayable
 
 # Variables used to run this test
 purchase_order_number = ''
@@ -60,12 +61,26 @@ def test_two(resource):
 def test_three(resource):
     r_page = ProcurementPageNavigationBar(resource)
     try:
-        r_page.click_purchase_order()
-        r_page.click_direct_purchase()
-        r_page.click_create_direct_purchase()
+        r_page.click_bill_payable()
+        r_page.click_create_vendor_bill_payable()
         r_page.get_full_page_screenshot('modular_test_3')
     except Exception as e:
         r_page.get_full_page_screenshot('test_3_error')
+        raise e
+    
+def test_four(resource):
+    r_page = CreateVendorBillPayable(resource)
+    try:
+        r_page.search_vendor(TestResources.test_vendor_name)
+        r_page.bill_number("Automated Bill")
+        r_page.bill_date_with_text("13-07-2025")
+        r_page.bill_receive_date_with_text("13-07-2025")
+        r_page.select_all_items()
+        r_page.submit_bill()
+        r_page.confirm_submission()
+        r_page.get_full_page_screenshot('modular_test_4')
+    except Exception as e:
+        r_page.get_full_page_screenshot('test_4_error')
         raise e
     
 # def test_four(resource): 
@@ -83,36 +98,44 @@ def test_three(resource):
 #         r_page.get_full_page_screenshot('test_4_error')
 #         raise e
 
-def test_four(resource):
-    r_page = CreateDirectPurchase(resource)
-    try:
-        r_page.search_vendor(TestResources.test_vendor_name)
-        r_page.same_delivery_schedule()
-        r_page.estimated_delivery_date_with_text("24/11/2026")
-        r_page.delivery_location_dropdown_select()
-        # r_page.delivery_location_Other()
-        r_page.delivery_location("Dhaka, Bangladesh")
-        r_page.search_item_by_name(TestResources.test_requisition_number)
-        r_page.select_all_items()
-        r_page.save_and_next()
-        global purchase_order_number
-        purchase_order_number = r_page.get_purchase_order_number()
-        print("Ord number:", purchase_order_number)
-        r_page.template_selection()
-        r_page.direct_purchase_approver_selecting(TestResources.test_purchase_approver)
-        r_page.submit_direct_purchase()
-        r_page.confirm_submission()
-        r_page.get_full_page_screenshot('modular_test_4')
-    except Exception as e:
-        r_page.get_full_page_screenshot('test_4_error')
-        raise e
-print("xyzPurchase Order Number:", purchase_order_number)
+# def test_four(resource):
+#     r_page = CreateDirectPurchase(resource)
+#     try:
+#         r_page.search_vendor(TestResources.test_vendor_name)
+#         r_page.same_delivery_schedule()
+#         r_page.estimated_delivery_date_with_text("24/11/2026")
+#         r_page.delivery_location_dropdown_select()
+#         # r_page.delivery_location_Other()
+#         r_page.delivery_location("Dhaka, Bangladesh")
+#         r_page.search_item_by_name(TestResources.test_requisition_number)
+#         r_page.select_all_items()
+#         r_page.save_and_next()
+#         global purchase_order_number
+#         purchase_order_number = r_page.get_purchase_order_number()
+#         print("Ord number:", purchase_order_number)
+#         r_page.template_selection()
+#         r_page.direct_purchase_approver_selecting(TestResources.test_purchase_approver)
+#         r_page.submit_direct_purchase()
+#         r_page.confirm_submission()
+#         r_page.get_full_page_screenshot('modular_test_4')
+#     except Exception as e:
+#         r_page.get_full_page_screenshot('test_4_error')
+#         raise e
+# print("xyzPurchase Order Number:", purchase_order_number)
     
+
 
 # def test_five(resource):
 #     r_page = DirectPurchaseList(resource)
 #     try:
 #         r_page.search_purchase_order()
+
+# def test_five(resource):
+#     r_page = DirectPurchaseList(resource)
+#     try:
+#         print("DPL Ord number:", purchase_order_number)
+#         r_page.search_purchase_order(purchase_order_number)
+
 #         # r_page.select_direct_purchase_order()
 #         # r_page.approve_direct_purchase()
 #         # r_page.confirmation_message_approve()
@@ -120,6 +143,7 @@ print("xyzPurchase Order Number:", purchase_order_number)
 #     except Exception as e:
 #         r_page.get_full_page_screenshot('test_5_error')
 #         raise e
+
 
 def test_five(resource):
     r_page = DirectPurchaseList(resource)
@@ -133,6 +157,7 @@ def test_five(resource):
     except Exception as e:
         r_page.get_full_page_screenshot('test_5_error')
         raise e
+
 
 
 

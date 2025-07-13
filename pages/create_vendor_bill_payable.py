@@ -34,19 +34,26 @@ class CreateVendorBillPayable(ProcurementHomePage, BasicActions):
         self.search_result.wait_for(state="visible", timeout=5000)
         self.search_result.hover()
         self.search_result.click()
+        
     
-    def bill_number(self, bill_no: str):
-        self.bill_no.fill(bill_no)
+    def bill_number(self, bill_no_1: str):
+        self.wait_for_timeout(5000)
+        self.bill_no.fill(bill_no_1)
+        self.page.keyboard.type(" ")
+        self.page.keyboard.press("Backspace") 
+        self.wait_for_timeout(1000)
 
     def bill_date_with_text(self, date: str):
         # Fill the estimated delivery date input field
         self.bill_date.scroll_into_view_if_needed()
         self.bill_date.fill(date)
+        self.wait_for_timeout(1000)
 
     def bill_receive_date_with_text(self, date: str):
         # Fill the estimated delivery date input field
         self.bill_receive_date.scroll_into_view_if_needed()
         self.bill_receive_date.fill(date)
+        self.wait_for_timeout(1000)
 
     def select_all_items(self):
         self.select_all.scroll_into_view_if_needed()
