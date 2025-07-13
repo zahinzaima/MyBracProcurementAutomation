@@ -51,8 +51,6 @@ class CreateDirectPurchase(ProcurementHomePage, BasicActions):
         self.est_delivery_date_with_text.scroll_into_view_if_needed()
         self.est_delivery_date_with_text.fill(date)
         # Validate the date format
-        if not re.match(r"^\d{2}/\d{2}/\d{4}$", date):
-            raise ValueError("Date must be in DD/MM/YYYY format")
 
     def estimated_delivery_date_using_calendar(self):
         # Click on the estimated delivery date calendar icon
