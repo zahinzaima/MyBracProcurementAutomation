@@ -16,7 +16,7 @@ def browser_context_args(browser_context_args):
 @pytest.fixture(scope='session', autouse=True)
 def resource():
     with sync_playwright() as playwright:
-        browser = playwright.chromium.launch(args=["--start-maximized"], headless=True)
+        browser = playwright.chromium.launch(args=["--start-maximized"], headless=False)
         context = browser.new_context(viewport=None)
         page = context.new_page()
         yield page
