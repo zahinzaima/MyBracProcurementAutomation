@@ -125,10 +125,12 @@ def test_four(resource):
     
 
 
+
 # def test_five(resource):
 #     r_page = DirectPurchaseList(resource)
 #     try:
 #         r_page.search_purchase_order()
+
 
 # def test_five(resource):
 #     r_page = DirectPurchaseList(resource)
@@ -145,6 +147,7 @@ def test_four(resource):
 #         raise e
 
 
+
 def test_five(resource):
     r_page = DirectPurchaseList(resource)
     try:
@@ -157,6 +160,7 @@ def test_five(resource):
     except Exception as e:
         r_page.get_full_page_screenshot('test_5_error')
         raise e
+
 
 
 
