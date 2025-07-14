@@ -5,7 +5,7 @@ from rich.traceback import install
 
 from pages.create_requisition_page import CreateRequisitionPage
 from pages.dashboard_page import DashboardPage
-from pages.digital_marketplace.LoginPage import LoginPage
+from pages.digital_marketplace.login_page import LoginPage
 from pages.procurement_home_page import ProcurementHomePage
 from resources.DMResourceFile import TestResourcesDM
 from resources.resource_file import TestResources
