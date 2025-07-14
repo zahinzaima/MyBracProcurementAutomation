@@ -2,4 +2,8 @@
 *.png
 /__pychache__
 __pychache__
+*.pycvenv/
+__pycache__/
 *.pyc
+*.pyo
+*.pyd
