@@ -19,6 +19,7 @@ from pages.create_tender_initiation import CreateTenderInitiation
 from pages.create_direct_purchase import CreateDirectPurchase 
 from pages.direct_purchase_list import DirectPurchaseList 
 
+from pages.ePMS_page_navigation_bar import ePMSPageNavigationBar
 
 install()
 
@@ -44,28 +45,131 @@ def test_one(resource):
     )
     #s_page.get_screen_shot('modular_test_1')
 
+#def test_two(resource):
+    #print("Test Two")
+    #r_page = DashboardPage(resource)
+    #try:
+        #r_page.closing_add()
+        #r_page.goto_procurement()
+        #r_page.get_full_page_screenshot('modular_test_2')
+    #except Exception as e:
+        #r_page.get_full_page_screenshot('test_2_error')
+        #raise e
+    
+
 def test_two(resource):
     print("Test Two")
     r_page = DashboardPage(resource)
     try:
         r_page.closing_add()
-        r_page.goto_procurement()
+        r_page.goto_ePMS()
         r_page.get_full_page_screenshot('modular_test_2')
     except Exception as e:
         r_page.get_full_page_screenshot('test_2_error')
         raise e
+    
 
+#def test_three(resource):
+    #r_page = ProcurementPageNavigationBar(resource)
+    #try:
+        #r_page.click_purchase_order()
+        #r_page.click_direct_purchase()
+        #r_page.click_create_direct_purchase()
+        #r_page.get_full_page_screenshot('modular_test_3')
+    #except Exception as e:
+        #r_page.get_full_page_screenshot('test_3_error')
+        #raise e
+    
 def test_three(resource):
-    r_page = ProcurementPageNavigationBar(resource)
+    r_page = ePMSPageNavigationBar(resource)
     try:
-        r_page.click_purchase_order()
+        r_page.click_ePMS()
         r_page.click_direct_purchase()
         r_page.click_create_direct_purchase()
         r_page.get_full_page_screenshot('modular_test_3')
     except Exception as e:
         r_page.get_full_page_screenshot('test_3_error')
         raise e
+
+# this page contains all the test cases for the samplePage
+import pytest
+
+from rich.traceback import install
+
+from pages.create_requisition_page import CreateRequisitionPage
+from pages.dashboard_page import DashboardPage
+from pages.login_page import LoginPage
+from pages.procurement_home_page import ProcurementHomePage
+from resources.resource_file import TestResources
+from pages.requisition_approve_list import RequisitionApproveList
+from pages.assign_requisition import AssignRequisition
+from pages.requisition_accept_list import RequisitionAcceptList
+from pages.main_navigation_bar import MainNavigationBar
+from utils.basic_actions import BasicActions       
+from playwright.sync_api import sync_playwright
+from pages.procurement_page_navigation_bar import ProcurementPageNavigationBar
+from pages.create_tender_initiation import CreateTenderInitiation 
+from pages.create_direct_purchase import CreateDirectPurchase 
+from pages.direct_purchase_list import DirectPurchaseList 
+
+from pages.ePMS_page_navigation_bar import ePMSPageNavigationBar
+
+install()
+
+@pytest.fixture(scope='session', autouse=True)
+def resource():
+    with sync_playwright() as playwright:
+        browser = playwright.chromium.launch(args=["--start-maximized"], headless=False)
+        context = browser.new_context(no_viewport=True)
+        page = context.new_page()
+        yield page
+        page.close()
+        context.close()
+        browser.close()
+
+
+def test_one(resource):
+    print("Test One")
+    s_page  = LoginPage(resource)
+    s_page.navigate_to_url(TestResources.test_url)
+    s_page.perform_login(
+        user_name=TestResources.test_user_name,
+        pass_word=TestResources.test_user_pass
+    )
+    #s_page.get_screen_shot('modular_test_1')
+
+#def test_two(resource):
+    #print("Test Two")
+    #r_page = DashboardPage(resource)
+    #try:
+        #r_page.closing_add()
+        #r_page.goto_procurement()
+        #r_page.get_full_page_screenshot('modular_test_2')
+    #except Exception as e:
+        #r_page.get_full_page_screenshot('test_2_error')
+        #raise e
     
+
+def test_two(resource):
+    print("Test Two")
+    r_page = DashboardPage(resource)
+    try:
+        r_page.closing_add()
+        r_page.goto_ePMS()
+        r_page.get_full_page_screenshot('modular_test_2')
+    except Exception as e:
+        r_page.get_full_page_screenshot('test_2_error')
+        raise e
+
+def test_go_to_objective_setting_self(resource):
+    nav = ePMSPageNavigationBar(resource)
+    try:
+        nav.go_to_objective_setting_self()
+        nav.get_full_page_screenshot("objective_setting_self")
+    except Exception as e:
+        nav.get_full_page_screenshot("objective_setting_self_error")
+        raise e
+
 # def test_four(resource): 
 #     r_page = CreateTenderInitiation(resource)
 #     try:
@@ -228,3 +332,17 @@ def test_four(resource):
 #         r_page.get_full_page_screenshot('test_12_error')
 #         raise e
         
+from pages.objective_setting_page import ObjectiveSettingPage
+
+def test_objective_setting_entry(resource):
+    print("Test Objective Setting Entry")
+    try:
+        nav_bar = ePMSPageNavigationBar(resource)
+        nav_bar.click_ePMS()
+
+        objective_page = ObjectiveSettingPage(resource)
+        objective_page.go_to_self_opening_year()
+        objective_page.fill_form()
+    except Exception as e:
+        resource.screenshot(path="test_objective_setting_error.png")
+        raise e

@@ -1,0 +1,47 @@
+# this is an object of samplePage to automate, which contains all elements
+# and actions could be performed, like input, verify etc.
+from utils.basic_actions import BasicActions
+from playwright.sync_api import expect
+import re
+
+
+class ePMSPageNavigationBar(BasicActions):
+    def __init__(self, page):
+        super().__init__(page)
+
+        self.objectivesetting_tile = page.get_by_role("button", name="Objective Setting")
+        self.self_tab = page.get_by_role("button", name="Self")  # or use locator with text 'Self' if needed
+
+    def go_to_objective_setting_self(self):
+        self.objectivesetting_tile.wait_for(state="visible")
+        self.objectivesetting_tile.click()
+        self.wait_for_timeout(1000)
+
+        self.self_tab.wait_for(state="visible")
+        self.self_tab.click()
+        self.wait_for_timeout(1000)
+
+
+
+
+
+
+    def click_objectivesetting(self):
+        self.objectivesetting.wait_for(state="visible")
+        self.objectivesetting.click()
+        self.objectivesetting.wait_for(state="visible")
+
+    def click_createobjectivesetting(self):
+        self.ccreateobjectivesetting.wait_for(state="visible")
+        self.ccreateobjectivesetting.click()
+        self.wait_for_timeout(1000)  
+    
+    def click_objectivesettinglist(self):
+        self.objectivesettinglist.wait_for(state="visible")
+        self.objectivesettinglist.click()
+        self.wait_for_timeout(1000)
+    
+    
+
+        
+        

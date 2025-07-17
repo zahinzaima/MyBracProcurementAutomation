@@ -26,3 +26,15 @@
 #     )
 #     s_page.get_screen_shot('modular_test_one')
 #
+class LoginPage:
+    def __init__(self, page):
+        self.page = page
+
+    def navigate_to_url(self, url):
+        self.page.goto(url)
+
+    def perform_login(self, username, password):
+        self.page.fill("input[name='userName']", username)
+        self.page.fill("input[name='password']", password)
+        self.page.click("button:has-text('Login')")
+        self.page.wait_for_timeout(3000)
